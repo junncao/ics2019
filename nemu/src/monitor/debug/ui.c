@@ -42,6 +42,7 @@ static int cmd_si(char *args){
   if(!args){
     lineNum = sscanf(args, "%d ", &lineNum);
   }
+  printf("test2\n");
   cpu_exec(lineNum);
   return 0;
 }

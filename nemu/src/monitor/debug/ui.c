@@ -38,12 +38,9 @@ static int cmd_q(char *args) {
 
 static int cmd_si(char *args){
   int lineNum = 1;
-  printf("test\n");
-  if(!args){
-    printf("test3");
+  if(args){
     lineNum = sscanf(args, "%d ", &lineNum);
   }
-  printf("test2\n");
   cpu_exec(lineNum);
   return 0;
 }

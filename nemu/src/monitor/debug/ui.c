@@ -50,10 +50,25 @@ static int cmd_info(char *args){
     if(args[0] == 'r'){
       isa_reg_display();
     }
+    else if(args[0] == 'w'){
+      //TODO
+    }
+    else{
+      printf("Wrong argument!\n");
+    }
   }
   else{
     printf("Lack argument!\n");
   }
+  return 0;
+}
+
+static int cmd_x(char *args){
+  int number, index;
+  number = index = -1;
+  sscanf("aaaa", "%d %d", &number, &index);
+  printf("%d %d", number, index);
+  sscanf(args, "%d %d", &number, &index);
   return 0;
 }
 
@@ -69,6 +84,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si", "Execute N steps", cmd_si },
   { "info", "Show the information of register", cmd_info },
+  { "x", "Show the details of memory", cmd_x }
 
   /* TODO: Add more commands */
 

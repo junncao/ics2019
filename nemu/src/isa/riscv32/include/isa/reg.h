@@ -5,6 +5,8 @@
 
 #define PC_START (0x80000000u + IMAGE_START)
 
+void isa_reg_display();
+
 typedef struct {
   struct {
     rtlreg_t _32;

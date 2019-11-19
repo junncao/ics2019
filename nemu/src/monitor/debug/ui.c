@@ -45,6 +45,18 @@ static int cmd_si(char *args){
   return 0;
 }
 
+static int cmd_info(char *args){
+  if(args){
+    if(args[0] == 'r'){
+      isa_reg_display();
+    }
+  }
+  else{
+    printf("Lack argument!\n");
+  }
+  return 0;
+}
+
 static int cmd_help(char *args);
 
 static struct {
@@ -56,6 +68,7 @@ static struct {
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
   { "si", "Execute N steps", cmd_si },
+  { "info", "Show the information of register", cmd_info },
 
   /* TODO: Add more commands */
 

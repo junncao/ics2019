@@ -8,6 +8,13 @@ const char *regsl[] = {
 };
 
 void isa_reg_display() {
+  int regNum = sizeof(regsl)/sizeof(regsl[0]);
+  rtlreg_t reg;
+  for(int i = 0; i < regNum; i++)
+  {
+    reg = reg_l(i);
+    printf("%10s 0x%x %d\n", reg_name(i, sizeof(reg)*8), reg, reg);
+  }
 }
 
 uint32_t isa_reg_str2val(const char *s, bool *success) {

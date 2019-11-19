@@ -39,9 +39,7 @@ static int cmd_q(char *args) {
 static int cmd_si(char *args){
   int lineNum = 1;
   if(args){
-    printf("%s\n", args);
-    lineNum = sscanf("2s", "%d", &lineNum);
-    printf("line %d\n", lineNum);
+    sscanf(args, "%d", &lineNum);
   }
   cpu_exec(lineNum);
   return 0;

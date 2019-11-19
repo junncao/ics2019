@@ -40,6 +40,7 @@ static int cmd_si(char *args){
   int lineNum = 1;
   printf("test\n");
   if(!args){
+    printf("test3");
     lineNum = sscanf(args, "%d ", &lineNum);
   }
   printf("test2\n");

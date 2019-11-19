@@ -66,7 +66,8 @@ static int cmd_info(char *args){
 static int cmd_x(char *args){
   int number, index;
   number = index = -1;
-  sscanf(args, "%d %d", &number, &index);
+  sscanf(args, "%d 0x%x", &number, &index);
+  printf("%d 0x%x\n", number, index);
   if(index == -1 || number <= 0 ){
     printf("Wrong argument!\n");
     return 0;

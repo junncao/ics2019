@@ -67,8 +67,19 @@ static int cmd_x(char *args){
   int number, index;
   number = index = -1;
   sscanf("aaaa", "%d %d", &number, &index);
-  printf("%d %d", number, index);
-  sscanf(args, "%d %d", &number, &index);
+  if(index == -1 || number <= 0 ){
+    printf("Wrong argument!\n");
+    return 0;
+  }
+  for(int i = 0; i < number; i++){
+    if(i%4 == 0){
+      printf("0x%-10x:", index + i*4);
+    } 
+    printf("0x%-10x", paddr_read(index, 4)); 
+    if( ((i-3)%4 == 0) && (i != number-1))
+      printf("\n");
+  }
+  printf("\n");
   return 0;
 }
 

@@ -40,6 +40,7 @@ static int cmd_si(char *args){
   int lineNum = 1;
   if(args){
     lineNum = sscanf(args, "%d ", &lineNum);
+    printf("line %d", lineNum);
   }
   cpu_exec(lineNum);
   return 0;

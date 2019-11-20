@@ -168,6 +168,8 @@ int calculate(int i, int j, bool *success){
       *success = false;
       return 0;
     }
+
+    printf("Op success %d\n", op);
     value1 = calculate(i, op-1, &success1);
     value2 = calculate(op+1, j, &success2);
     if(!success1 || !success2){

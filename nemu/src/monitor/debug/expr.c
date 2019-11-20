@@ -141,6 +141,7 @@ int calculate(int i, int j, bool *success){
     return calculate(i+1, j-1, success);
   }
   else{
+    printf("search op\n");
     int bracketNum = 0, op = -1; // op is the position of main opcode
     int flag = 1; // flag is 1 only when the main opcode is * or /
     bool success1, success2;

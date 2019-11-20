@@ -6,10 +6,12 @@
 #include <sys/types.h>
 #include <regex.h>
 
-enum {
-  TK_NOTYPE = 256, TK_EQ
+int calculate(int i, int j, bool *success);
+bool check_parentheses(int i, int j);
 
-  /* TODO: Add more token types */
+enum {
+  TK_NOTYPE = 256, TK_EQ, TK_NUM
+
 
 };
 
@@ -21,10 +23,15 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
-
+  {"[0-9]+", TK_NUM}, //numbers
+  {"-", '-'},   // minus
+  {"\\*", '*'}, // multiply
+  {"/", '/'},   // slide
   {" +", TK_NOTYPE},    // spaces
   {"\\+", '+'},         // plus
-  {"==", TK_EQ}         // equal
+  {"==", TK_EQ},         //  equal
+  {"\\(", '('},
+  {"\\)", ')'}
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -80,10 +87,20 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
-          default: TODO();
-        }
-
-        break;
+          case TK_NUM:
+            if(substr_len >= 32){
+              printf("number is too big!\n");
+              assert(0);
+            } 
+            for(int j = 0; j < substr_len; j++){
+              tokens[nr_token].str[j] = substr_start[j];
+            } 
+            tokens[nr_token].str[substr_len] = 0;
+          default:
+            tokens[nr_token].type = rules[i].token_type;
+            nr_token++;
+          case TK_NOTYPE:
+            break;
       }
     }
 
@@ -91,6 +108,7 @@ static bool make_token(char *e) {
       printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
       return false;
     }
+  }
   }
 
   return true;
@@ -101,9 +119,92 @@ uint32_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   }
+  return calculate(0, nr_token-1, success);
+}
 
-  /* TODO: Insert codes to evaluate the expression. */
-  TODO();
+int calculate(int i, int j, bool *success){
+  if(i > j){
+    *success = false;
+    return 0;
+  }
+  else if(i == j){
+    if(tokens[i].type != TK_NUM){
+      *success = false;
+      return 0;
+    }
+    int number;
+    sscanf(tokens[i].str, "%d", &number);
+    *success = true;
+    return number; 
+  }
+  else if(check_parentheses(i,j)){
+    return calculate(i+1, j-1, success);
+  }
+  else{
+    int bracketNum = 0, op = -1; // op is the position of main opcode
+    int flag = 1; // flag is 1 only when the main opcode is * or /
+    bool success1, success2;
+    int value1, value2;
 
-  return 0;
+    for(int k = i; k <=j; k++){
+      if(tokens[k].type == '('){
+        bracketNum++;
+      }
+      else if(tokens[k].type == ')'){
+        bracketNum--;
+      }
+      else if(bracketNum == 0){
+        if(tokens[i].type == '+' || tokens[i].type == '-'){
+          op = i;
+          flag = 0;
+        }
+        if(flag && (tokens[i].type == '*' || tokens[i].type == '/')){
+          op = i;
+        }
+      }
+    }
+
+    if(op == -1){
+      *success = false;
+      return 0;
+    }
+    value1 = calculate(i, op-1, &success1);
+    value2 = calculate(op+1, j, &success2);
+    if(!success1 || !success2){
+      *success = false;
+      return 0;
+    }
+    *success = true;
+    switch(tokens[op].type){
+      case '+': return value1 + value2;
+      case '-': return value1 - value2;
+      case '*': return value1*value2;
+      case '/':
+        if(value2 == 0){
+          printf("Divide 0!\n");
+          assert(0);
+        }
+        return value1/value2;
+      default: assert(0);
+    }
+  }
+}
+
+bool check_parentheses(int i, int j){
+  int bracketNum = 0;
+  if(tokens[i].type != '(' || tokens[j].type != ')')
+    return false;
+  for(int k = i+1; k < j;k++){
+    if(bracketNum < 0)
+      return false;
+    if(tokens[k].type == '('){
+      bracketNum++;
+    }
+    if(tokens[k].type == ')'){
+      bracketNum--;
+    }
+  }
+  if(bracketNum != 0)
+    return false;
+  return true;
 }

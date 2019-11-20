@@ -12,20 +12,3 @@ int main(int argc, char *argv[]) {
 
   return 0;
 }
-
-//void expr_test(){
-//  int result;
-//  int mresult;
-//  char expr[1000];
-//  bool success;
-//  FILE *fp = fopen("../tools/gen-expr/input", "r");
-//  while(sscanf(fp, "%d %s", &result, expr) != EOF){
-//    mresult = expr(expr, &success);
-//    if(mresult == result && success){
-//      printf("OK!\n");
-//    }
-//    else{
-//      printf("BAD!\n");
-//    }
-//  }
-//}

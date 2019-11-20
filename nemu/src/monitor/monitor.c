@@ -128,6 +128,7 @@ void expr_test(){
   while(fscanf(fp, "%d %s", &result, mexpr) != EOF){
     printf("test:%d %s\n", result, mexpr);
     mresult = expr(mexpr, &success);
+    printf("mtest:%d %s\n", mresult, mexpr);
     if(mresult == result && success){
       printf("OK!\n");
     }

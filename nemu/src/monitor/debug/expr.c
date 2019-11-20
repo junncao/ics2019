@@ -141,9 +141,9 @@ int calculate(int i, int j, bool *success){
     return calculate(i+1, j-1, success);
   }
   else{
-    printf("search op\n");
-    printf("i = %d, j = %d\n", i, j);
-    printf("type = %d, * = %d\n", tokens[1].type, '*');
+    //printf("search op\n");
+    //printf("i = %d, j = %d\n", i, j);
+    //printf("type = %d, * = %d\n", tokens[1].type, '*');
     int bracketNum = 0, op = -1; // op is the position of main opcode
     int flag = 1; // flag is 1 only when the main opcode is * or /
     bool success1, success2;
@@ -157,12 +157,12 @@ int calculate(int i, int j, bool *success){
         bracketNum--;
       }
       else if(bracketNum == 0){
-        if(tokens[i].type == '+' || tokens[i].type == '-'){
-          op = i;
+        if(tokens[k].type == '+' || tokens[k].type == '-'){
+          op = k;
           flag = 0;
         }
-        if(flag && (tokens[i].type == '*' || tokens[i].type == '/')){
-          op = i;
+        if(flag && (tokens[k].type == '*' || tokens[k].type == '/')){
+          op = k;
         }
       }
     }

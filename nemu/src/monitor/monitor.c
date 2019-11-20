@@ -120,6 +120,7 @@ void expr_test(){
   char mexpr[1000];
   bool success;
   FILE *fp = fopen("../tools/gen-expr/input", "r");
+  printf("test1\n");
   while(fscanf(fp, "%d %s", &result, mexpr) != EOF){
     printf("test:%d %s\n", result, mexpr);
     mresult = expr(mexpr, &success);

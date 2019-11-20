@@ -120,7 +120,6 @@ void expr_test(){
   char mexpr[1000];
   bool success;
   FILE *fp = fopen("./tools/gen-expr/input", "r");
-  printf("test1\n");
   if(!fp){
     printf("Open Error!\n");
     return;

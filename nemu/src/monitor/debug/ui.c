@@ -83,6 +83,18 @@ static int cmd_x(char *args){
   return 0;
 }
 
+static int cmd_p(char *args){
+  bool success; 
+  int res;
+  res = expr(args, &success);
+  if(!success){
+    printf("Wrong experssion!\n");
+    return 0;
+  }
+  printf("%d\n", res);
+  return 0;
+}
+
 static int cmd_help(char *args);
 
 static struct {
@@ -95,7 +107,8 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si", "Execute N steps", cmd_si },
   { "info", "Show the information of register", cmd_info },
-  { "x", "Show the details of memory", cmd_x }
+  { "x", "Show the details of memory", cmd_x },
+  { "p", "Print the result of an experssion", cmd_p },
 
   /* TODO: Add more commands */
 

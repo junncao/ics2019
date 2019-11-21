@@ -6,6 +6,7 @@
 #define PC_START (0x80000000u + IMAGE_START)
 
 void isa_reg_display();
+uint32_t isa_reg_str2val(const char*, bool *);
 
 typedef struct {
   struct {

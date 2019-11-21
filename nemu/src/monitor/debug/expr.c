@@ -131,17 +131,20 @@ int calculate(int i, int j, bool *success){
     return 0;
   }
   else if(i == j){
-    if(tokens[i].type != TK_NUM && tokens[i].type != TK_HEXNUM){
+    if(tokens[i].type != TK_NUM && tokens[i].type != TK_HEXNUM && tokens[i].type != TK_REG){
       *success = false;
       return 0;
     }
     int number;
-    if(tokens[i].type == TK_NUM)
+    *success = true;
+
+    if(tokens[i].type == TK_REG)
+      number = isa_reg_str2val(tokens[i].str, success); 
+    else if(tokens[i].type == TK_NUM)
       sscanf(tokens[i].str, "%d", &number);
     else
       sscanf(&(tokens[i].str[2]), "%x", &number); //delete "0x"
-    printf("%s number: %d\n", tokens[i].str, number);
-    *success = true;
+    //printf("%s number: %d\n", tokens[i].str, number);
     return number; 
   }
   else if(check_parentheses(i,j)){

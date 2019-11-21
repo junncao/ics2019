@@ -170,10 +170,10 @@ int calculate(int i, int j, bool *success){
     //printf("i = %d, j = %d\n", i, j);
     //printf("type = %d, * = %d\n", tokens[1].type, '*');
     int bracketNum = 0, op = -1; // op is the position of main opcode
-    int flag = 1; // flag is 1 only when the main opcode is * or /
+    int flag = 4; // flag is 1 only when the main opcode is * or /
     bool success1, success2;
     int value1, value2;
-
+    // &&  <   !=,==  <  *,/  <  +,-
     for(int k = i; k <=j; k++){
       if(tokens[k].type == '('){
         bracketNum++;
@@ -184,10 +184,19 @@ int calculate(int i, int j, bool *success){
       else if(bracketNum == 0){
         if(tokens[k].type == '+' || tokens[k].type == '-'){
           op = k;
-          flag = 0;
+          flag = 1;
         }
-        if(flag && (tokens[k].type == '*' || tokens[k].type == '/')){
+        if(flag>1 && (tokens[k].type == '*' || tokens[k].type == '/')){
           op = k;
+          flag = 2;
+        }
+        if(flag > 2 && (tokens[k].type == TK_EQ || tokens[k].type == TK_NEQ)){
+          op = k;
+          flag = 3;
+        }
+        if(flag == 4 && (tokens[k].type == TK_AND)){
+          op = k;
+          flag = 4;
         }
       }
     }
@@ -214,6 +223,9 @@ int calculate(int i, int j, bool *success){
           assert(0);
         }
         return value1/value2;
+      case TK_EQ: return (value1 == value2);
+      case TK_NEQ: return (value1 != value2);
+      case TK_AND: return (value1 && value2);
       default: assert(0);
     }
   }

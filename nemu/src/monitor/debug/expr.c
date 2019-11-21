@@ -29,7 +29,7 @@ static struct rule {
   {"-", '-'},   // minus
   {"\\*", '*'}, // multiply
   {"/", '/'},   // slide
-  {" +", TK_NOTYPE},    // spaces
+  {"[' ']+", TK_NOTYPE},    // spaces
   {"\\+", '+'},         // plus
   {"==", TK_EQ},         //  equal
   {"!=", TK_NEQ},

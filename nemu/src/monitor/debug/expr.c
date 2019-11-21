@@ -10,8 +10,8 @@ int calculate(int i, int j, bool *success);
 bool check_parentheses(int i, int j);
 
 enum {
-  TK_NOTYPE = 256, TK_EQ, TK_NUM
-
+  TK_NOTYPE = 256, TK_EQ, TK_NUM, TK_HEXNUM,
+  TK_REG,
 
 };
 
@@ -23,6 +23,8 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
+  {"$[0-9a-zA-z]+", TK_REG}, //registers: Can be more specific
+  {"0x[0-9]+", TK_HEXNUM},  //Hex number: Must before number
   {"[0-9]+", TK_NUM}, //numbers
   {"-", '-'},   // minus
   {"\\*", '*'}, // multiply
@@ -128,12 +130,15 @@ int calculate(int i, int j, bool *success){
     return 0;
   }
   else if(i == j){
-    if(tokens[i].type != TK_NUM){
+    if(tokens[i].type != TK_NUM && tokens[i].type != TK_HEXNUM){
       *success = false;
       return 0;
     }
     int number;
-    sscanf(tokens[i].str, "%d", &number);
+    if(tokens[i].type == TK_NUM)
+      sscanf(tokens[i].str, "%d", &number);
+    else
+      sscanf(&(tokens[i].str[2]), "%x", &number); //delete "0x"
     *success = true;
     return number; 
   }

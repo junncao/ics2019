@@ -91,7 +91,7 @@ static int cmd_p(char *args){
     printf("Wrong experssion!\n");
     return 0;
   }
-  printf("%d\n", res);
+  printf("0x%x %d\n", res, res);
   return 0;
 }
 

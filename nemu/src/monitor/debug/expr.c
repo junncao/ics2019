@@ -11,7 +11,7 @@ bool check_parentheses(int i, int j);
 
 enum {
   TK_NOTYPE = 256, TK_EQ, TK_NUM, TK_HEXNUM,
-  TK_REG,
+  TK_REG, TK_NEQ, TK_AND, DEREF,
 
 };
 
@@ -32,6 +32,8 @@ static struct rule {
   {" +", TK_NOTYPE},    // spaces
   {"\\+", '+'},         // plus
   {"==", TK_EQ},         //  equal
+  {"!=", TK_NEQ},
+  {"&&", TK_AND},
   {"\\(", '('},
   {"\\)", ')'}
 };
@@ -123,6 +125,11 @@ uint32_t expr(char *e, bool *success) {
     *success = false;
     return 0;
   }
+  for(int i = 0; i < nr_token; i++){
+    if(tokens[i].type == '*' && (i==0 || (tokens[i-1].type == '('))){
+      tokens[i].type = DEREF;
+    }
+  }
   return calculate(0, nr_token-1, success);
 }
 
@@ -147,6 +154,13 @@ int calculate(int i, int j, bool *success){
       sscanf(&(tokens[i].str[2]), "%x", &number); //delete "0x"
     //printf("%s number: %d\n", tokens[i].str, number);
     return number; 
+  }
+  else if(tokens[i].type == DEREF){
+    int addr = calculate(i+1, j, success);
+    if(!(*success)){
+      return 0;
+    }
+    return paddr_read(addr, 4);
   }
   else if(check_parentheses(i,j)){
     return calculate(i+1, j-1, success);

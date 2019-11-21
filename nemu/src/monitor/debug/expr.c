@@ -90,6 +90,7 @@ static bool make_token(char *e) {
 
         switch (rules[i].token_type) {
           case TK_NUM:
+          case TK_HEXNUM:
             if(substr_len >= 32){
               printf("number is too big!\n");
               assert(0);
@@ -139,7 +140,7 @@ int calculate(int i, int j, bool *success){
       sscanf(tokens[i].str, "%d", &number);
     else
       sscanf(&(tokens[i].str[2]), "%d", &number); //delete "0x"
-    printf("%s number: %d\n", tokens[i].str, number);
+    printf("number: %d\n", number);
     *success = true;
     return number; 
   }

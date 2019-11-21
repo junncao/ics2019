@@ -89,6 +89,7 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
+          case TK_REG:
           case TK_NUM:
           case TK_HEXNUM:
             if(substr_len >= 32){

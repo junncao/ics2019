@@ -139,7 +139,7 @@ int calculate(int i, int j, bool *success){
     *success = true;
 
     if(tokens[i].type == TK_REG)
-      number = isa_reg_str2val(tokens[i].str, success); 
+      number = isa_reg_str2val(&(tokens[i].str[1]), success); 
     else if(tokens[i].type == TK_NUM)
       sscanf(tokens[i].str, "%d", &number);
     else

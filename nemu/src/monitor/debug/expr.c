@@ -139,7 +139,7 @@ int calculate(int i, int j, bool *success){
     if(tokens[i].type == TK_NUM)
       sscanf(tokens[i].str, "%d", &number);
     else
-      sscanf(&(tokens[i].str[2]), "%d", &number); //delete "0x"
+      sscanf(&(tokens[i].str[2]), "%x", &number); //delete "0x"
     printf("%s number: %d\n", tokens[i].str, number);
     *success = true;
     return number; 

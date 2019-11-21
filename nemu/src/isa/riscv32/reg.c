@@ -18,6 +18,7 @@ void isa_reg_display() {
 }
 
 uint32_t isa_reg_str2val(const char *s, bool *success) {
+  printf("%s\n", s);
   int regNum = sizeof(regsl)/sizeof(regsl[0]);
   for(int i = 0; i < regNum; i++){
     if(strcmp(s, regsl[i]) == 0){

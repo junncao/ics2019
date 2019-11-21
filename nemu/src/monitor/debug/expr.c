@@ -23,7 +23,7 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
-  {"$[0-9a-zA-z]+", TK_REG}, //registers: Can be more specific
+  {"$[$0-9a-zA-z]+", TK_REG}, //registers: Can be more specific
   {"0x[0-9a-fA-F]+", TK_HEXNUM},  //Hex number: Must before number
   {"[0-9]+", TK_NUM}, //numbers
   {"-", '-'},   // minus

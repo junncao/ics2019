@@ -140,7 +140,7 @@ int calculate(int i, int j, bool *success){
       sscanf(tokens[i].str, "%d", &number);
     else
       sscanf(&(tokens[i].str[2]), "%d", &number); //delete "0x"
-    printf("number: %d\n", number);
+    printf("%s number: %d\n", tokens[i].str, number);
     *success = true;
     return number; 
   }

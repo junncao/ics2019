@@ -95,6 +95,20 @@ static int cmd_p(char *args){
   return 0;
 }
 
+static int cmd_w(char *args){
+  bool success;
+  int res;
+  res = expr(args, &success);
+  if(!success){
+    printf("Wrong experssion!\n");
+    return 0;
+  }
+  WP *wp = new_wp();
+  wp->last_value = res;
+  strcpy(wp->wp_expr, args);
+  return 0;
+}
+
 static int cmd_help(char *args);
 
 static struct {
@@ -109,6 +123,7 @@ static struct {
   { "info", "Show the information of register", cmd_info },
   { "x", "Show the details of memory", cmd_x },
   { "p", "Print the result of an experssion", cmd_p },
+  { "w", "Set watchpoint", cmd_w },
 
   /* TODO: Add more commands */
 

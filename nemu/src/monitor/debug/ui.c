@@ -8,6 +8,7 @@
 #include <readline/history.h>
 
 void cpu_exec(uint64_t);
+extern WP *head;
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
@@ -51,7 +52,11 @@ static int cmd_info(char *args){
       isa_reg_display();
     }
     else if(args[0] == 'w'){
-      //TODO
+      printf("%6s%20s%10s\n","Num", "Experssion", "Result");
+      for(WP* tmp = head;tmp;tmp = tmp->next){
+        printf("%6d%20s%6d\n", tmp->NO, tmp->wp_expr, tmp->last_value);
+      }
+      return 0;
     }
     else{
       printf("Wrong argument!\n");

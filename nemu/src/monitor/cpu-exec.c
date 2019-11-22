@@ -75,6 +75,7 @@ void cpu_exec(uint64_t n) {
     printf("Watchpoint triggered!\n");
     nemu_state.state = NEMU_STOP;
   }
+  printf("test2\n");
 
 #endif
 

@@ -45,7 +45,6 @@ void cpu_exec(uint64_t n) {
     /* Execute one instruction, including instruction fetch,
      * instruction decode, and the actual execution. */
     __attribute__((unused)) vaddr_t seq_pc = exec_once();
-    printf("test\n");
 
 #if defined(DIFF_TEST)
   difftest_step(ori_pc, cpu.pc);
@@ -60,7 +59,6 @@ void cpu_exec(uint64_t n) {
               "we do not record more instruction trace beyond this point.\n"
               "To capture more trace, you can modify the LOG_MAX macro in %s\n\n", __FILE__);
   }
-  printf("test2\n");
 
     /* TODO: check watchpoints here. */
   bool success;

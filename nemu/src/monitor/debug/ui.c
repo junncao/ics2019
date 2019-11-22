@@ -114,6 +114,18 @@ static int cmd_w(char *args){
   return 0;
 }
 
+static int cmd_d(char *args){
+  int number;
+  sscanf(args, "%d", &number);
+  for(WP* tmp = head; tmp; tmp = tmp->next){
+    if(tmp->NO == number){
+      free_wp(tmp);
+      return 0;
+    }
+  }
+  return 0;
+}
+
 static int cmd_help(char *args);
 
 static struct {
@@ -129,6 +141,7 @@ static struct {
   { "x", "Show the details of memory", cmd_x },
   { "p", "Print the result of an experssion", cmd_p },
   { "w", "Set watchpoint", cmd_w },
+  { "d", "Delete watchpoint", cmd_d },
 
   /* TODO: Add more commands */
 

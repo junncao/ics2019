@@ -50,7 +50,6 @@ void cpu_exec(uint64_t n) {
 #if defined(DIFF_TEST)
   difftest_step(ori_pc, cpu.pc);
 #endif
-  printf("test2\n");
 
 #ifdef DEBUG
   if (g_nr_guest_instr < LOG_MAX) {
@@ -61,6 +60,7 @@ void cpu_exec(uint64_t n) {
               "we do not record more instruction trace beyond this point.\n"
               "To capture more trace, you can modify the LOG_MAX macro in %s\n\n", __FILE__);
   }
+  printf("test2\n");
 
     /* TODO: check watchpoints here. */
   bool success;

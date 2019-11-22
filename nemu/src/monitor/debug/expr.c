@@ -35,7 +35,7 @@ static struct rule {
   {"!=", TK_NEQ},
   {"&&", TK_AND},
   {"\\(", '('},
-  {"\\)", ')'}
+  {"\\)", ')'},
 };
 
 #define NR_REGEX (sizeof(rules) / sizeof(rules[0]) )
@@ -108,6 +108,7 @@ static bool make_token(char *e) {
           case TK_NOTYPE:
             break;
       }
+      break;
     }
     }
 

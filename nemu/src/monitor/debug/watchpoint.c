@@ -47,12 +47,13 @@ void free_wp(WP *wp){
   //wp is the first element in wp list
   if(flag == 0)
     head = head->next;
-  tmp = head;
-  for(int i = 0; i < flag-1; i++){
-    tmp = tmp->next;
+  else{
+    tmp = head;
+    for(int i = 0; i < flag-1; i++){
+      tmp = tmp->next;
+    }
+    tmp->next = tmp->next->next;
   }
-  tmp->next = tmp->next->next;
-
   wp->next = free_;
   free_ = wp;
 }

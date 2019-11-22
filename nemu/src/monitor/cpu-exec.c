@@ -50,6 +50,7 @@ void cpu_exec(uint64_t n) {
 #if defined(DIFF_TEST)
   difftest_step(ori_pc, cpu.pc);
 #endif
+  printf("test2\n");
 
 #ifdef DEBUG
   if (g_nr_guest_instr < LOG_MAX) {
@@ -75,7 +76,6 @@ void cpu_exec(uint64_t n) {
     printf("Watchpoint triggered!\n");
     nemu_state.state = NEMU_STOP;
   }
-  printf("test2\n");
 
 #endif
 

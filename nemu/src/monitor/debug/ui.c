@@ -52,9 +52,9 @@ static int cmd_info(char *args){
       isa_reg_display();
     }
     else if(args[0] == 'w'){
-      printf("%6s%20s%10s\n","Num", "Experssion", "Result");
+      printf("%-6s%-20s%-10s\n","Num", "Experssion", "Result");
       for(WP* tmp = head;tmp;tmp = tmp->next){
-        printf("%6d%20s%6d\n", tmp->NO, tmp->wp_expr, tmp->last_value);
+        printf("%-6d%-20s%-6d\n", tmp->NO, tmp->wp_expr, tmp->last_value);
       }
       return 0;
     }

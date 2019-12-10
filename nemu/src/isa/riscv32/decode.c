@@ -51,3 +51,15 @@ make_DHelper(st) {
 
   decode_op_r(id_dest, decinfo.isa.instr.rs2, true);
 }
+
+make_DHelper(ai) {
+  decode_op_r(id_src, decinfo.isa.instr.rs1, true);
+  //TODO: add signed
+  int32_t simm = decinfo.isa.instr.simm11_0;
+  decode_op_i(id_src2, simm, true);
+
+  //print_dop(id_src->str, op_str_size, "%d(%s)", id_src2->val, reg_name(id_src->reg, 4));
+
+  rtl_add(&id_dest->val, &id_src2->val, &id_src->val);
+
+}

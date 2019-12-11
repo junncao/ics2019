@@ -56,7 +56,6 @@ make_DHelper(ai) {
   decode_op_r(id_src, decinfo.isa.instr.rs1, true);
   //TODO: add signed
   s0 = decinfo.isa.instr.simm11_0;
-  printf("test1\n");
 
   //print_dop(id_src->str, op_str_size, "%d(%s)", id_src2->val, reg_name(id_src->reg, 4));
 

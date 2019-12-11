@@ -20,15 +20,14 @@ static make_EHelper(store) {
 }
 
 static OpcodeEntry opcode_table [32] = {
-  /* b00 */ IDEX(ld, load), EMPTY, EMPTY, EMPTY, IDEX(ai, addi), EMPTY, EMPTY, EMPTY,
+  /* b00 */ IDEX(ld, load), EMPTY, EMPTY, EMPTY, IDEX(ai, addi), IDEX(AUP, auipc), EMPTY, EMPTY,
   /* b01 */ IDEX(st, store), EMPTY, EMPTY, EMPTY, EMPTY, IDEX(U, lui), EMPTY, EMPTY,
-  /* b10 */ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, IDEX(AUP, auipc),
+  /* b10 */ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
   /* b11 */ EMPTY, EMPTY, EX(nemu_trap), EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
 };
 
 void isa_exec(vaddr_t *pc) {
   decinfo.isa.instr.val = instr_fetch(pc, 4);
   assert(decinfo.isa.instr.opcode1_0 == 0x3);
-  printf("test3\n");
   idex(pc, &opcode_table[decinfo.isa.instr.opcode6_2]);
 }

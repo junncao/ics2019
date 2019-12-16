@@ -4,6 +4,6 @@ make_EHelper(jal){
     rtl_sr(id_dest->reg, &s0, 4);
     rtl_add(&(decinfo.jmp_pc), &s0, &id_src->val);
     printf("pc:%x\n", decinfo.jmp_pc);
-    //decinfo_set_jmp(true);
+    decinfo_set_jmp(true);
     print_asm_template2(jal);
 }

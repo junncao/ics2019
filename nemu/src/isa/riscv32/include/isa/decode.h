@@ -57,5 +57,6 @@ make_DHelper(ld);
 make_DHelper(st);
 make_DHelper(ai);
 make_DHelper(AUP);
+make_DHelper(JAL);
 
 #endif

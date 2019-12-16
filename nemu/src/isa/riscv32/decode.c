@@ -65,3 +65,8 @@ make_DHelper(AUP) {
   decode_op_i(id_src, decinfo.isa.instr.imm31_12 << 12, true);
   decode_op_r(id_dest, decinfo.isa.instr.rd, false);
 }
+
+make_DHelper(JAL) {
+  decode_op_i(id_src, decinfo.isa.instr.simm11_0, true);
+  decode_op_r(id_dest, decinfo.isa.instr.rd, false);
+}

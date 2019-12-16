@@ -74,6 +74,6 @@ make_DHelper(JAL) {
 }
 
 make_DHelper(JALR) {
-  decode_op_r(id_src, decinfo.isa.instr.rd, true);
+  decode_op_r(id_src, decinfo.isa.instr.rs1, true);
   decode_op_r(id_dest, decinfo.isa.instr.rd, false);
 }

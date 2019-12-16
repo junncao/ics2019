@@ -58,5 +58,6 @@ make_DHelper(st);
 make_DHelper(ai);
 make_DHelper(AUP);
 make_DHelper(JAL);
+make_DHelper(JALR);
 
 #endif

@@ -1,4 +1,5 @@
 #include "cpu/exec.h"
+
 make_EHelper(jal){
     s0 = decinfo.seq_pc;
     s1 = 4;
@@ -8,4 +9,12 @@ make_EHelper(jal){
     //printf("pc:%x\n", decinfo.jmp_pc);
     decinfo_set_jmp(true);
     print_asm_template2(jal);
+}
+
+make_EHelper(jalr){
+    rtl_sr(id_dest->reg, &s0, 4);
+    decinfo.jmp_pc = id_src->val;
+    //printf("pc:%x\n", decinfo.jmp_pc);
+    decinfo_set_jmp(true);
+    print_asm_template2(jalr);
 }

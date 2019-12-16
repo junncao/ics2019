@@ -46,10 +46,9 @@ static inline void idex(vaddr_t *pc, OpcodeEntry *e) {
 }
 
 static inline void update_pc(void) {
-    //FIXME: not know right or not
   if (decinfo.is_jmp) {
       cpu.pc = decinfo.jmp_pc;
-      printf("test pc:%x", decinfo.jmp_pc);
+      //printf("test pc:%x", decinfo.jmp_pc);
       decinfo_set_jmp(false);
   }
   else { cpu.pc = decinfo.seq_pc; }

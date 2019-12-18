@@ -6,7 +6,7 @@ make_EHelper(lui) {
   print_asm_template2(lui);
 }
 
-make_EHelper(CALUI) {
+make_EHelper(calui) {
    switch(decinfo.isa.instr.funct3){
       case 0:
             rtl_addi(&id_dest->val, &id_src->val, decinfo.isa.instr.simm11_0);

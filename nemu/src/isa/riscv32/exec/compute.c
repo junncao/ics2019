@@ -96,12 +96,18 @@ make_EHelper(calu) {
           }
             break;
       case 6:
-            rtl_xor(&id_dest->val, &id_src->val, &id_src2->val);
-            print_asm_template2(xor);
+          if(decinfo.isa.instr.funct7){
+            rtl_div_r(&id_dest->val, &id_src->val, &id_src2->val);
+            print_asm_template2(rem);
+          }
+          else{
+            rtl_or(&id_dest->val, &id_src->val, &id_src2->val);
+            print_asm_template2(or);
+          }
             break;
       case 7:
             rtl_and(&id_dest->val, &id_src->val, &id_src2->val);
-            print_asm_template2(or);
+            print_asm_template2(and);
             break;
       default:
             assert(0 && "Unfinished CALU opcode");

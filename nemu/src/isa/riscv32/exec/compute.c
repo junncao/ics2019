@@ -88,6 +88,10 @@ make_EHelper(calu) {
             rtl_xor(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(or);
             break;
+      case 7:
+            rtl_and(&id_dest->val, &id_src->val, &id_src2->val);
+            print_asm_template2(or);
+            break;
       default:
             assert(0 && "Unfinished CALU opcode");
 

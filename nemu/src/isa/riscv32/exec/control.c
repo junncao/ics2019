@@ -19,9 +19,19 @@ make_EHelper(jalr){
     print_asm_template2(jalr);
 }
 
-make_EHelper(beq){
+make_EHelper(bra){
     decinfo.jmp_pc = decinfo.seq_pc+id_dest->val-4;
-    //printf("pc:%x\n", decinfo.jmp_pc);
-    decinfo_set_jmp((id_src->val == id_src2->val));
-    print_asm_template2(beq);
+    switch(decinfo.isa.instr.funct3){
+        case 0:
+            decinfo_set_jmp((id_src->val == id_src2->val));
+            print_asm_template2(beq);
+            break;
+        case 1:
+            decinfo_set_jmp((id_src->val != id_src2->val));
+            print_asm_template2(bne);
+            break;
+        default:
+            assert(0 && "Unfinished branch opcode");
+
+    }
 }

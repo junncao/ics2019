@@ -23,7 +23,7 @@ static OpcodeEntry opcode_table [32] = {
   /* b00 */ IDEX(ld, load), EMPTY, EMPTY, EMPTY, IDEX(CALUI, calui), IDEX(AUP, auipc), EMPTY, EMPTY,
   /* b01 */ IDEX(st, store), EMPTY, EMPTY, EMPTY, IDEX(CALU, calu), IDEX(U, lui), EMPTY, EMPTY,
   /* b10 */ EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY,
-  /* b11 */ IDEX(BEQ, beq), IDEX(JALR, jalr), EX(nemu_trap), IDEX(JAL, jal), EMPTY, EMPTY, EMPTY, EMPTY,
+  /* b11 */ IDEX(BRA, bra), IDEX(JALR, jalr), EX(nemu_trap), IDEX(JAL, jal), EMPTY, EMPTY, EMPTY, EMPTY,
 };
 
 void isa_exec(vaddr_t *pc) {

@@ -68,7 +68,7 @@ make_EHelper(calu) {
             print_asm_template2(sll);
             break;
       case 2:
-            id_dest->val = id_src->val < id_src2->val;
+            id_dest->val = (signed)id_src->val < (signed)id_src2->val;
             print_asm_template2(slt);
             break;
       case 3:

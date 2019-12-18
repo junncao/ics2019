@@ -79,8 +79,8 @@ static int cmd_x(char *args){
   for(int i = 0; i < number; i++){
     if(i%4 == 0){
       printf("0x%-10x:", index + i*4);
-    } 
-    printf("0x%-10x", paddr_read(index + i*4, 4)); 
+    }
+    printf("0x%-10x", paddr_read(index + i*4, 4));
     if( ((i-3)%4 == 0) && (i != number-1))
       printf("\n");
   }
@@ -89,7 +89,7 @@ static int cmd_x(char *args){
 }
 
 static int cmd_p(char *args){
-  bool success; 
+  bool success;
   int res;
   res = expr(args, &success);
   if(!success){
@@ -142,8 +142,6 @@ static struct {
   { "p", "Print the result of an experssion", cmd_p },
   { "w", "Set watchpoint", cmd_w },
   { "d", "Delete watchpoint", cmd_d },
-
-  /* TODO: Add more commands */
 
 };
 

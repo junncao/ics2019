@@ -21,7 +21,7 @@ make_EHelper(calui) {
             print_asm_template2(sltiu);
             break;
       case 4:
-            rtl_xori(&id_dest->val, &id_src->val, decinfo.isa.instr.rs2);
+            rtl_xori(&id_dest->val, &id_src->val, decinfo.isa.instr.simm11_0);
             print_asm_template2(sltiu);
             break;
       case 5:
@@ -35,7 +35,7 @@ make_EHelper(calui) {
           }
           break;
       case 7:
-            rtl_andi(&id_dest->val, &id_src->val, decinfo.isa.instr.rs2);
+            rtl_andi(&id_dest->val, &id_src->val, decinfo.isa.instr.simm11_0);
             print_asm_template2(sltiu);
             break;
       default:

@@ -30,9 +30,13 @@ make_EHelper(bra){
             decinfo_set_jmp((id_src->val != id_src2->val));
             print_asm_template2(bne);
             break;
+        case 4:
+            decinfo_set_jmp((id_src->val < id_src2->val));
+            print_asm_template2(bge);
+            break;
         case 5:
             decinfo_set_jmp((id_src->val >= id_src2->val));
-            print_asm_template2(bne);
+            print_asm_template2(bge);
             break;
         default:
             assert(0 && "Unfinished branch opcode");

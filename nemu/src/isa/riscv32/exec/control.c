@@ -31,7 +31,7 @@ make_EHelper(bra){
             print_asm_template2(bne);
             break;
         case 4:
-            decinfo_set_jmp((id_src->val > id_src2->val));
+            decinfo_set_jmp(((signed)id_src->val < (signed)id_src2->val));
             print_asm_template2(blt);
             break;
         case 5:

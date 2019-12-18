@@ -53,6 +53,10 @@ make_EHelper(calu) {
             id_dest->val = (unsigned)id_src->val < (unsigned)id_src2->val;
             print_asm_template2(sltu);
             break;
+      case 4:
+            rtl_xor(&id_dest->val, &id_src->val, &id_src2->val);
+            print_asm_template2(xor);
+            break;
       default:
             assert(0 && "Unfinished CALU opcode");
 

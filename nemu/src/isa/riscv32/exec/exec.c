@@ -11,7 +11,7 @@ static make_EHelper(load) {
 }
 
 static OpcodeEntry store_table [8] = {
-  EMPTY, EMPTY, EXW(st, 4), EMPTY, EMPTY, EMPTY, EMPTY, EMPTY
+  EXW(st, 1), EXW(st, 2), EXW(st, 4), EMPTY, EMPTY, EMPTY, EMPTY, EMPTY
 };
 
 static make_EHelper(store) {

@@ -16,8 +16,12 @@ make_EHelper(calui) {
             id_dest->val = (signed)id_src->val < (signed)decinfo.isa.instr.simm11_0;
             print_asm_template2(slti);
             break;
+      case 2:
+            id_dest->val = (unsigned)id_src->val < (unsigned)decinfo.isa.instr.simm11_0;
+            print_asm_template2(sltiu);
+            break;
       default:
-            assert(0 && "Unfinished CALU opcode");
+            assert(0 && "Unfinished CALUI opcode");
 
   }
   rtl_sr(id_dest->reg, &id_dest->val, 4);

@@ -30,12 +30,15 @@ make_EHelper(calui) {
             print_asm_template2(shri);
           }
           break;
+      case 7:
+            rtl_andi(&id_dest->val, &id_src->val, decinfo.isa.instr.rs2);
+            print_asm_template2(sltiu);
+            break;
       default:
             assert(0 && "Unfinished CALUI opcode");
 
   }
   rtl_sr(id_dest->reg, &id_dest->val, 4);
-  print_asm_template2(addi);
 }
 
 make_EHelper(calu) {

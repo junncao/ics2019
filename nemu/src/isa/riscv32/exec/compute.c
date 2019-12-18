@@ -46,11 +46,16 @@ make_EHelper(calui) {
 }
 
 make_EHelper(calu) {
+  int funct7 = (unsigned)decinfo.isa.instr.funct7;
   switch(decinfo.isa.instr.funct3){
       case 0:
-          if(decinfo.isa.instr.funct7){
+          if(funct7 & 0b0100000){
             rtl_sub(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(sub);
+          }
+          else if(funct7 & 0b1){
+            rtl_mul_lo(&id_dest->val, &id_src->val, &id_src2->val);
+            print_asm_template2(mul);
           }
           else{
             rtl_add(&id_dest->val, &id_src->val, &id_src2->val);
@@ -71,8 +76,14 @@ make_EHelper(calu) {
             print_asm_template2(sltu);
             break;
       case 4:
+          if(funct7 & 0b1){
+            rtl_div_q(&id_dest->val, &id_src->val, &id_src2->val);
+            print_asm_template2(div);
+          }
+          else{
             rtl_xor(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(xor);
+          }
             break;
       case 5:
           if(decinfo.isa.instr.funct7){

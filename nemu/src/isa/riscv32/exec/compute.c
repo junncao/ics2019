@@ -15,7 +15,7 @@ make_EHelper(addi) {
 
 make_EHelper(calu) {
   switch(decinfo.isa.instr.funct3){
-      case 000:
+      case 0:
           if(decinfo.isa.instr.funct7){
             rtl_sub(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(sub);
@@ -24,6 +24,21 @@ make_EHelper(calu) {
             rtl_add(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(add);
           }
+          break;
+          //TODO: remaining thing may need to fill
+      case 1:
+            //rtl_sll(&id_dest->val, &id_src->val, &id_src2->val);
+            print_asm_template2(sll);
+            break;
+      case 2:
+            //rtl_slt(&id_dest->val, &id_src->val, &id_src2->val);
+            print_asm_template2(slt);
+            break;
+      case 3:
+            //rtl_sltu(&id_dest->val, &id_src->val, &id_src2->val);
+            print_asm_template2(slt);
+            break;
+
   }
   rtl_sr(id_dest->reg, &id_dest->val, 4);
 

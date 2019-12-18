@@ -20,6 +20,10 @@ make_EHelper(calui) {
             id_dest->val = (unsigned)id_src->val < (unsigned)decinfo.isa.instr.simm11_0;
             print_asm_template2(sltiu);
             break;
+      case 4:
+            rtl_xori(&id_dest->val, &id_src->val, decinfo.isa.instr.rs2);
+            print_asm_template2(sltiu);
+            break;
       case 5:
           if(decinfo.isa.instr.funct7){
             rtl_sari(&id_dest->val, &id_src->val, decinfo.isa.instr.rs2);

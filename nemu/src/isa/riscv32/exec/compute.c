@@ -20,6 +20,16 @@ make_EHelper(calui) {
             id_dest->val = (unsigned)id_src->val < (unsigned)decinfo.isa.instr.simm11_0;
             print_asm_template2(sltiu);
             break;
+      case 5:
+          if(decinfo.isa.instr.funct7){
+            rtl_sari(&id_dest->val, &id_src->val, decinfo.isa.instr.rs2);
+            print_asm_template2(srai);
+          }
+          else{
+            rtl_shri(&id_dest->val, &id_src->val, decinfo.isa.instr.rs2);
+            print_asm_template2(shri);
+          }
+          break;
       default:
             assert(0 && "Unfinished CALUI opcode");
 
@@ -57,6 +67,16 @@ make_EHelper(calu) {
             rtl_xor(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(xor);
             break;
+      case 5:
+          if(decinfo.isa.instr.funct7){
+            rtl_sar(&id_dest->val, &id_src->val, &id_src2->val);
+            print_asm_template2(sra);
+          }
+          else{
+            rtl_shr(&id_dest->val, &id_src->val, &id_src2->val);
+            print_asm_template2(shr);
+          }
+            break;
       case 6:
             rtl_xor(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(or);
@@ -75,3 +95,4 @@ make_EHelper(auipc){
     rtl_sr(id_dest->reg, &id_src->val, 4);
     print_asm_template2(auipc);
 }
+

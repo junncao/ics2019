@@ -7,7 +7,7 @@ static OpcodeEntry load_table [8] = {
 
 static make_EHelper(load) {
   decinfo.width = load_table[decinfo.isa.instr.funct3].width;
-  printf("width: %d\n", decinfo.width);
+  //printf("width: %d\n", decinfo.width);
   idex(pc, &load_table[decinfo.isa.instr.funct3]);
 }
 

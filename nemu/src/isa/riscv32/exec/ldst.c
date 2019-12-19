@@ -20,6 +20,7 @@ make_EHelper(ld) {
                 print_asm_template2(lbu);
             }
             else{
+                s0 = (signed int)((signed char)s0);
                 print_asm_template2(lb);
             }
             break;

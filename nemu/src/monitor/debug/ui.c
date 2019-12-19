@@ -80,7 +80,7 @@ static int cmd_x(char *args){
     if(i%4 == 0){
       printf("0x%-10x:", index + i*4);
     }
-    printf("0x%-10x", paddr_read(index + i*4, 4));
+    printf("0x%-10x", isa_vaddr_read(index + i*4, 4));
     if( ((i-3)%4 == 0) && (i != number-1))
       printf("\n");
   }

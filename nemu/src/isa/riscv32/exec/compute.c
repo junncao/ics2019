@@ -12,6 +12,10 @@ make_EHelper(calui) {
             rtl_addi(&id_dest->val, &id_src->val, decinfo.isa.instr.simm11_0);
             print_asm_template2(addi);
           break;
+      case 1:
+            rtl_shli(&id_dest->val, &id_src->val, decinfo.isa.instr.simm11_0);
+            print_asm_template2(slli);
+            break;
       case 2:
             id_dest->val = (signed)id_src->val < (signed)decinfo.isa.instr.simm11_0;
             print_asm_template2(slti);

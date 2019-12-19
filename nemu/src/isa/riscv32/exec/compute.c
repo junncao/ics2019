@@ -68,16 +68,28 @@ make_EHelper(calu) {
           break;
           //TODO: remaining thing may need to fill
       case 1:
+          if(funct7 & 0b1){
+            rtl_mul_hi(&id_dest->val, &id_src->val, &id_src2->val);
+            print_asm_template2(mulh);
+          }
+          else{
             rtl_shl(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(sll);
+          }
             break;
       case 2:
             id_dest->val = (signed)id_src->val < (signed)id_src2->val;
             print_asm_template2(slt);
             break;
       case 3:
+          if(funct7 & 0b1){
+            rtl_mul_hi(&id_dest->val, &id_src->val, &id_src2->val);
+            print_asm_template2(mulhu);
+          }
+          else{
             id_dest->val = (unsigned)id_src->val < (unsigned)id_src2->val;
             print_asm_template2(sltu);
+          }
             break;
       case 4:
           if(funct7 & 0b1){

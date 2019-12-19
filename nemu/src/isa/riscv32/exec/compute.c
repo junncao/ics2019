@@ -61,9 +61,12 @@ make_EHelper(calu) {
             rtl_mul_lo(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(mul);
           }
-          else{
+          else if(funct7 == 0){
             rtl_add(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(add);
+          }
+          else{
+              assert(0);
           }
           break;
           //TODO: remaining thing may need to fill
@@ -72,9 +75,12 @@ make_EHelper(calu) {
             rtl_imul_hi(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(mulh);
           }
-          else{
+          else if(funct7 == 0){
             rtl_shl(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(sll);
+          }
+          else{
+              assert(0);
           }
             break;
       case 2:
@@ -86,9 +92,12 @@ make_EHelper(calu) {
             rtl_mul_hi(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(mulhu);
           }
-          else{
+          else if(funct7 == 0){
             id_dest->val = (unsigned)id_src->val < (unsigned)id_src2->val;
             print_asm_template2(sltu);
+          }
+          else{
+              assert(0);
           }
             break;
       case 4:

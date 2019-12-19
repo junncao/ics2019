@@ -69,7 +69,7 @@ make_EHelper(calu) {
           //TODO: remaining thing may need to fill
       case 1:
           if(funct7 & 0b1){
-            rtl_mul_hi(&id_dest->val, &id_src->val, &id_src2->val);
+            rtl_imul_hi(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(mulh);
           }
           else{

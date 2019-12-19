@@ -33,7 +33,7 @@ char* strncpy(char* dst, const char* src, size_t n) {
 
 char* strcat(char* dst, const char* src) {
     int i = strlen(dst);
-    strcat((char*)(dst+i), src);
+    strcpy((char*)(dst+i), src);
     return dst;
 }
 

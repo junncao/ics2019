@@ -6,6 +6,9 @@ int main() {
 	sprintf(buf, "%s", "Hello world!\n");
 	nemu_assert(strcmp(buf, "Hello world!\n") == 0);
 
+	sprintf(buf, "%s", "Hello world!\n");
+	nemu_assert(strcmp(buf, "Hello world!\n") == 0);
+
 	sprintf(buf, "%d", 1);
 	nemu_assert(strcmp(buf, "1") == 0);
 

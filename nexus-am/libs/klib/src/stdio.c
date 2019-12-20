@@ -41,7 +41,6 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
                     for(int l = 0; l < k;l++){
                         out[j+l] = tmpc[k-1-l] + '0';
                     }
-                    assert(out[j] == '1');
                     j+=k;
                     count++;
                     break;

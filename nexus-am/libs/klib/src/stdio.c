@@ -12,7 +12,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
     char tmpc[30], sflag;
     char *tmp;
     int inte;
-    int i = 0, j =0, k;
+    int i = 0, j = 0, k;
 
     for(;fmt[i];i++){
         if(flag){
@@ -39,7 +39,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
                         k++;
                     }
                     for(int l = 0; l < k;l++){
-                        out[j+l] = tmpc[k-1-l];
+                        out[j+l] = tmpc[k-1-l] + '0';
                     }
                     j+=k;
                     count++;

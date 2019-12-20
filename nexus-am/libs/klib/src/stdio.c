@@ -33,14 +33,16 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
                         out[j] = '-';
                         j++;
                     }
-                    while(inte){
+                    do{
                         tmpc[k] = inte % 10;
                         inte /= 10;
                         k++;
-                    }
+                    }while(inte);
                     for(int l = 0; l < k;l++){
                         out[j+l] = tmpc[k-1-l] + '0';
                     }
+                    assert(out[j+1] != 0);
+                    assert(out[j+1] != 1);
                     j+=k;
                     count++;
                     break;

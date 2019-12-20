@@ -47,8 +47,8 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
                     //TODO: deal with '%'
                 default:
                     assert(0 && "Unfinish stdio");
-
             }
+            continue;
         }
         if(fmt[i] == '%'){
             flag = 1;

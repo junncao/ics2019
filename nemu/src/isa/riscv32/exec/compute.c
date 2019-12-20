@@ -105,7 +105,7 @@ make_EHelper(calu) {
             rtl_div_q(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(div);
           }
-          else{
+          else if(funct7 == 0){
             rtl_xor(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(xor);
           }
@@ -115,7 +115,7 @@ make_EHelper(calu) {
             rtl_sar(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(sar);
           }
-          else{
+          else if(funct7 == 0){
             rtl_shr(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(shr);
           }

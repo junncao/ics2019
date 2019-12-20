@@ -57,6 +57,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         out[j] = fmt[i];
         j++;
     }
+    out[j] = 0;
     va_end(ap);
     return count;
 }

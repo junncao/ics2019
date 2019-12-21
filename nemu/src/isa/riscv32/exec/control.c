@@ -43,6 +43,10 @@ make_EHelper(bra){
             decinfo_set_jmp(((unsigned)id_src->val < (unsigned)id_src2->val));
             print_asm_template2(bltu);
             break;
+        case 7:
+            decinfo_set_jmp(((unsigned)id_src->val >= (unsigned)id_src2->val));
+            print_asm_template2(bgeu);
+            break;
         default:
             assert(0 && "Unfinished branch opcode");
 

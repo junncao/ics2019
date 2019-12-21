@@ -31,7 +31,7 @@ make_DHelper(U) {
 
 make_DHelper(ld) {
   Instr instr = decinfo.isa.instr;
-  s0 = (instr.funct3>>2) ? (unsigned)(instr.simm11_0): (signed)(instr.simm11_0);
+  s0 = (signed)(instr.simm11_0);
   decode_op_r(id_src, decinfo.isa.instr.rs1, true);
   decode_op_i(id_src2, s0, true);
 

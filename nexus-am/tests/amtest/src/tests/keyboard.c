@@ -22,7 +22,7 @@ void keyboard_test() {
     if (key != _KEY_NONE) {
       printf("Get key: %d %s %s\n", key, names[key], down ? "down" : "up");
       printf("GET KEY TEST TEST TEST\n");
-      printf("%d", "down");
+      printf("%s\n", "down");
     }
   }
 }

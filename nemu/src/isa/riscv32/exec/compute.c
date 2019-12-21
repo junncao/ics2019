@@ -38,6 +38,10 @@ make_EHelper(calui) {
             print_asm_template2(shri);
           }
           break;
+      case 6:
+            rtl_ori(&id_dest->val, &id_src->val, decinfo.isa.instr.simm11_0);
+            print_asm_template2(ori);
+            break;
       case 7:
             rtl_andi(&id_dest->val, &id_src->val, decinfo.isa.instr.simm11_0);
             print_asm_template2(andi);

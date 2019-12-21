@@ -106,12 +106,15 @@ make_EHelper(calu) {
             break;
       case 4:
           if(funct7 & 0b1){
-            rtl_div_q(&id_dest->val, &id_src->val, &id_src2->val);
+            rtl_idiv_q(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(div);
           }
           else if(funct7 == 0){
             rtl_xor(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(xor);
+          }
+          else{
+              assert(0);
           }
             break;
       case 5:
@@ -123,10 +126,13 @@ make_EHelper(calu) {
             rtl_shr(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(shr);
           }
+          else{
+              assert(0);
+          }
             break;
       case 6:
           if(decinfo.isa.instr.funct7){
-            rtl_div_r(&id_dest->val, &id_src->val, &id_src2->val);
+            rtl_idiv_r(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(rem);
           }
           else{
@@ -135,8 +141,14 @@ make_EHelper(calu) {
           }
             break;
       case 7:
+          if(decinfo.isa.instr.funct7){
+            rtl_div_r(&id_dest->val, &id_src->val, &id_src2->val);
+            print_asm_template2(rem);
+          }
+          else{
             rtl_and(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(and);
+          }
             break;
       default:
             assert(0 && "Unfinished CALU opcode");

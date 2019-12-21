@@ -12,6 +12,7 @@ int printf(const char *fmt, ...) {
     for(int i = 0;tmp[i];i++){
         _putc(tmp[i]);
     }
+    va_end(ap);
     return count;
 }
 
@@ -85,14 +86,15 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         j++;
     }
     out[j] = 0;
-    va_end(ap);
     return count;
 }
 
 int sprintf(char *out, const char *fmt, ...) {
     va_list ap;
     va_start(ap, fmt);
-    return vsprintf(out, fmt, ap);
+    int count = vsprintf(out, fmt, ap);
+    va_end(ap);
+    return count;
 }
 
 int snprintf(char *out, size_t n, const char *fmt, ...) {

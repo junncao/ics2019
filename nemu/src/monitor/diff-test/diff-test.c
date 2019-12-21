@@ -118,7 +118,7 @@ void difftest_step(vaddr_t ori_pc, vaddr_t next_pc) {
   ref_difftest_exec(1);
   ref_difftest_getregs(&ref_r);
 
-  checkregs(&ref_r, ori_pc);
+  checkregs(&ref_r, next_pc);
 }
 
 void difftest_detach() {

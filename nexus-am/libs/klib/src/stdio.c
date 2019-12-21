@@ -34,9 +34,11 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
             switch(fmt[i]){
                 case 's':
                     tmp = va_arg(ap,char*);
-                    for(int a = 0; a < fmtnum-strlen(tmp);a++){
-                        out[j] = ' ';
-                        j++;
+                    if(fmtnum > strlen(tmp)){
+                        for(int a = 0; a < fmtnum-strlen(tmp);a++){
+                            out[j] = ' ';
+                            j++;
+                        }
                     }
                     strcat(out+j, tmp);
                     j += strlen(tmp);
@@ -56,9 +58,11 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
                         inte /= 10;
                         k++;
                     }while(inte);
-                    for(int l = 0; l < fmtnum-k;l++){
-                        out[j] = ' ';
-                        j++;
+                    if(fmtnum > k){
+                        for(int l = 0; l < fmtnum-k;l++){
+                            out[j] = ' ';
+                            j++;
+                        }
                     }
                     for(int l = 0; l < k;l++){
                         out[j+l] = tmpc[k-1-l] + '0';

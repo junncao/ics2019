@@ -4,7 +4,15 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 int printf(const char *fmt, ...) {
-  return 0;
+    //FIXME: fix the potential problem of overflow
+    char tmp[200];
+    va_list ap;
+    va_start(ap, fmt);
+    int count = vsprintf(tmp, fmt, ap);
+    for(int i = 0;tmp[i];i++){
+        _putc(tmp[i]);
+    }
+    return count;
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {

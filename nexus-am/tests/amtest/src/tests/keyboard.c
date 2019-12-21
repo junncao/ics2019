@@ -21,8 +21,6 @@ void keyboard_test() {
     down = 0;
     if (key != _KEY_NONE) {
       printf("Get key: %d %s %s\n", key, names[key], down ? "down" : "up");
-      printf("GET KEY TEST TEST TEST\n");
-      printf("%s\n", "down");
     }
   }
 }

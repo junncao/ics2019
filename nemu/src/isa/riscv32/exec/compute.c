@@ -118,7 +118,11 @@ make_EHelper(calu) {
           }
             break;
       case 5:
-          if(decinfo.isa.instr.funct7){
+          if(decinfo.isa.instr.funct7 & 0x1){
+            rtl_idiv_q(&id_dest->val, &id_src->val, &id_src2->val);
+            print_asm_template2(divu);
+          }
+          else if(decinfo.isa.instr.funct7&0b0100000){
             rtl_sar(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(sar);
           }
@@ -131,7 +135,7 @@ make_EHelper(calu) {
           }
             break;
       case 6:
-          if(decinfo.isa.instr.funct7){
+          if(decinfo.isa.instr.funct7 & 0x1){
             rtl_idiv_r(&id_dest->val, &id_src->val, &id_src2->val);
             print_asm_template2(rem);
           }
@@ -143,7 +147,7 @@ make_EHelper(calu) {
       case 7:
           if(decinfo.isa.instr.funct7){
             rtl_div_r(&id_dest->val, &id_src->val, &id_src2->val);
-            print_asm_template2(rem);
+            print_asm_template2(remu);
           }
           else{
             rtl_and(&id_dest->val, &id_src->val, &id_src2->val);

@@ -16,7 +16,7 @@ int printf(const char *fmt, ...) {
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
-    int count = 0, flag = 0;
+    int count = 0, flag = 0, fmtnum = 0;
     char tmpc[30], sflag;
     char *tmp;
     int inte;
@@ -25,9 +25,19 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
     for(;fmt[i];i++){
         if(flag){
             flag = 0;
+            if(fmt[i]>='0' && fmt[i]<='9'){
+                fmtnum *= 10;
+                fmtnum += fmt[i]-'0';
+                flag = 1;
+                continue;
+            }
             switch(fmt[i]){
                 case 's':
                     tmp = va_arg(ap,char*);
+                    for(int a = 0; a < fmtnum-strlen(tmp);a++){
+                        out[j] = ' ';
+                        j++;
+                    }
                     strcat(out+j, tmp);
                     j += strlen(tmp);
                     count++;
@@ -46,6 +56,10 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
                         inte /= 10;
                         k++;
                     }while(inte);
+                    for(int l = 0; l < fmtnum-k;l++){
+                        out[j] = ' ';
+                        j++;
+                    }
                     for(int l = 0; l < k;l++){
                         out[j+l] = tmpc[k-1-l] + '0';
                     }
@@ -60,6 +74,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         }
         if(fmt[i] == '%'){
             flag = 1;
+            fmtnum = 0;
             continue;
         }
         out[j] = fmt[i];

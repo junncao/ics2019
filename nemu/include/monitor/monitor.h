@@ -2,6 +2,7 @@
 #define __MONITOR_H__
 
 #include "common.h"
+#include "diff-test.h"
 
 enum { NEMU_STOP, NEMU_RUNNING, NEMU_END, NEMU_ABORT };
 

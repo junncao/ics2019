@@ -12,8 +12,9 @@ make_EHelper(jal){
 }
 
 make_EHelper(jalr){
+    s0 = decinfo.seq_pc;
     rtl_sr(id_dest->reg, &s0, 4);
-    decinfo.jmp_pc = id_src->val;
+    decinfo.jmp_pc = (id_src->val+id_src2->val)&~1;
     //printf("pc:%x\n", decinfo.jmp_pc);
     decinfo_set_jmp(true);
     print_asm_template2(jalr);

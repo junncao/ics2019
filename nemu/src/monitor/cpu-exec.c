@@ -21,7 +21,9 @@ void interpret_rtl_exit(int state, vaddr_t halt_pc, uint32_t halt_ret) {
 }
 
 vaddr_t exec_once(void);
-//void difftest_step(vaddr_t ori_pc, vaddr_t next_pc);
+void difftest_step(vaddr_t ori_pc, vaddr_t next_pc);
+void difftest_skip_dut(int nr_ref, int nr_dut);
+void difftest_skip_ref(void);
 void asm_print(vaddr_t ori_pc, int instr_len, bool print_flag);
 
 static uint64_t g_nr_guest_instr = 0;

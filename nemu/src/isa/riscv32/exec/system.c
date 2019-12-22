@@ -1,12 +1,9 @@
 #include "cpu/exec.h"
 
-//static int32_t spec, sstatus, sscause, stvec;
-static int32_t stvec;
-
 int32_t readcsr(int i){
     switch(i){
         case 0x105:
-            return stvec;
+            return decinfo.isa.stvec;
         default:
             assert(0 && "Unfinished readcsr");
     }
@@ -16,7 +13,7 @@ void writecsr(int i, int32_t val){
     //TODO
     switch(i){
         case 0x105:
-            stvec = val;
+            decinfo.isa.stvec = val;
             break;
         default:
             assert(0 && "Unfinished readcsr");

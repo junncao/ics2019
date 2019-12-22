@@ -19,7 +19,7 @@ make_EHelper(system){
     switch(decinfo.isa.instr.funct3){
         // csrrw
         case 0b001:
-            break;
+ //           break;
         default:
             assert(0 && "Unfinished system op");
     }

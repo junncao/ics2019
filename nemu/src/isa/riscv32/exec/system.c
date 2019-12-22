@@ -17,6 +17,7 @@ void writecsr(int i, int32_t val){
     switch(i){
         case 0x105:
             stvec = val;
+            break;
         default:
             assert(0 && "Unfinished readcsr");
     }

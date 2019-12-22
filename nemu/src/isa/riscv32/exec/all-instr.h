@@ -15,3 +15,5 @@ make_EHelper(nemu_trap);
 make_EHelper(jal);
 make_EHelper(jalr);
 make_EHelper(bra);
+
+make_EHelper(system);

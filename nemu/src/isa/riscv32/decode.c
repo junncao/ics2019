@@ -96,3 +96,8 @@ make_DHelper(BRA) {
   decode_op_r(id_src2, decinfo.isa.instr.rs2, true);
 }
 
+make_DHelper(SYSTEM) {
+  decode_op_r(id_dest, decinfo.isa.instr.rd, false);
+  decode_op_r(id_src, decinfo.isa.instr.rs1, true);
+}
+

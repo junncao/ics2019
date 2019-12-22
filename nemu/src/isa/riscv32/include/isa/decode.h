@@ -61,5 +61,6 @@ make_DHelper(JALR);
 make_DHelper(CALU);
 make_DHelper(CALUI);
 make_DHelper(BRA);
+make_DHelper(SYSTEM);
 
 #endif

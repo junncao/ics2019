@@ -35,7 +35,6 @@ make_EHelper(system){
             rtl_sr(id_dest->reg, &s0, 4);
             break;
         default:
-            printf("%d", instr.funct3);
             assert(0 && "Unfinished system op");
     }
 }

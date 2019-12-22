@@ -27,7 +27,7 @@ size_t __am_video_write(uintptr_t reg, void *buf, size_t size) {
       int W = screen_width();
       int H = screen_height();
       uint32_t *pixels = ctl->pixels;
-      int cp_bytes = 4*min(W, W-x);
+      int cp_bytes = min(W, W-x);
       for(int j = 0; j < h && y + j < H; j++){
         //memcpy(&vmem[(y + j)* W +x], pixels, cp_bytes);
         //pixels += w;

@@ -7,8 +7,9 @@ size_t __am_video_read(uintptr_t reg, void *buf, size_t size) {
   switch (reg) {
     case _DEVREG_VIDEO_INFO: {
       _DEV_VIDEO_INFO_t *info = (_DEV_VIDEO_INFO_t *)buf;
-      info->width = 300;
-      info->height = 400;
+      uint32_t screen_info = inl(SCREEN_ADDR);
+      info->width = screen_info>>16;
+      info->height = screen_info&0xffff;
       return sizeof(_DEV_VIDEO_INFO_t);
     }
   }

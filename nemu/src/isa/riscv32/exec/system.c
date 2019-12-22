@@ -1,10 +1,12 @@
 #include "cpu/exec.h"
 
 //static int32_t spec, sstatus, sscause, stvec;
+static int32_t stvec;
 
 int32_t readcsr(int i){
     switch(i){
-        case 0:
+        case 0x105:
+            return stvec;
         default:
             assert(0 && "Unfinished readcsr");
     }
@@ -12,14 +14,23 @@ int32_t readcsr(int i){
 
 void writecsr(int i, int32_t val){
     //TODO
+    switch(i){
+        case 0x105:
+            stvec = val;
+        default:
+            assert(0 && "Unfinished readcsr");
+    }
 }
 
 make_EHelper(system){
-    s0 = id_src->val;
-    switch(decinfo.isa.instr.funct3){
+    Instr instr = decinfo.isa.instr;
+    s0 = readcsr(instr.csr);
+    switch(instr.funct3){
         // csrrw
         case 0b001:
- //           break;
+            writecsr(instr.csr, s0);
+            rtl_sr(id_dest->reg, &s0, 4);
+            break;
         default:
             assert(0 && "Unfinished system op");
     }

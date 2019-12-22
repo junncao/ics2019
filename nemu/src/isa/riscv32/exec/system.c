@@ -25,7 +25,7 @@ make_EHelper(system){
     Instr instr = decinfo.isa.instr;
     switch(instr.funct3){
         //ecall
-        case 0:
+        case 0b0:
             raise_intr(0, cpu.pc);
             break;
         // csrrw
@@ -35,6 +35,7 @@ make_EHelper(system){
             rtl_sr(id_dest->reg, &s0, 4);
             break;
         default:
+            printf("%d", instr.funct3);
             assert(0 && "Unfinished system op");
     }
 }

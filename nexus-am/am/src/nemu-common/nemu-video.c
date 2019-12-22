@@ -29,13 +29,13 @@ size_t __am_video_write(uintptr_t reg, void *buf, size_t size) {
       int W = 400;
       int H = 300;
       uint32_t *pixels = ctl->pixels;
-      int cp_bytes = min(W, W-x);
+      int cp_bytes = 32*min(W, W-x);
       for(int j = 0; j < h && y + j < H; j++){
-        //memcpy(&vmem[(y + j)* W +x], pixels, cp_bytes);
-        //pixels += w;
-        for(int k = 0; k < cp_bytes; k++){
-            vmem[(y+j)*W + x + k] = pixels[y*w + k];
-        }
+        memcpy(&vmem[(y + j)* W +x], pixels, cp_bytes);
+        pixels += w;
+        //for(int k = 0; k < cp_bytes; k++){
+        //    vmem[(y+j)*W + x + k] = pixels[y*w + k];
+        //}
       }
 
       if (ctl->sync) {

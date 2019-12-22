@@ -65,12 +65,19 @@ void* memset(void* v,int c,size_t n) {
 }
 
 void* memcpy(void* out, const void* in, size_t n) {
-    strncpy((char*)out, (char*)in, n);
+    for(int i = 0; i < n; i++){
+        ((char*)out)[i] = ((char*)in)[i];
+    }
     return out;
 }
 
 int memcmp(const void* s1, const void* s2, size_t n){
-    return strncmp((char*)s1, (char*)s2, n);
+    for(int i = 0; i < n; i++){
+        if(((char*)s1)[i] != ((char*)s2)[i]){
+            return ((char*)s1)[i] - ((char*)s2)[i];
+        }
+    }
+    return 0;
 }
 
 #endif

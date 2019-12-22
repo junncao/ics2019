@@ -24,8 +24,10 @@ size_t __am_video_write(uintptr_t reg, void *buf, size_t size) {
       _DEV_VIDEO_FBCTL_t *ctl = (_DEV_VIDEO_FBCTL_t *)buf;
       uint32_t *vmem = (uint32_t *)(uintptr_t)FB_ADDR;
       int x = ctl->x, y = ctl->y, w = ctl->w, h = ctl->h;
-      int W = screen_width();
-      int H = screen_height();
+      //int W = screen_width();
+      //int H = screen_height();
+      int W = 400;
+      int H = 300;
       uint32_t *pixels = ctl->pixels;
       int cp_bytes = sizeof(uint32_t) * min(w, W-x);
       for(int j = 0; j < h && y + j < H; j++){

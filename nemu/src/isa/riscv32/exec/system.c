@@ -1,5 +1,6 @@
 #include "cpu/exec.h"
 
+extern void raise_intr(uint32_t, vaddr_t);
 int32_t readcsr(int i){
     switch(i){
         case 0x105:
@@ -22,11 +23,15 @@ void writecsr(int i, int32_t val){
 
 make_EHelper(system){
     Instr instr = decinfo.isa.instr;
-    s0 = readcsr(instr.csr);
     switch(instr.funct3){
+        //ecall
+        case 0:
+            raise_intr(0, cpu.pc);
+            break;
         // csrrw
         case 0b001:
-            writecsr(instr.csr, s0);
+            s0 = readcsr(instr.csr);
+            writecsr(instr.csr, id_src->val);
             rtl_sr(id_dest->reg, &s0, 4);
             break;
         default:

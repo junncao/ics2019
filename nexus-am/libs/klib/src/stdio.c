@@ -34,7 +34,7 @@ static char * number(char *str, long num, int base, int size, int precision, int
 {
     if(base == 16){
         printf("size:%d\n", size);
-        printf("num:%l\n", num);
+        printf("num:%d\n", num);
     }
 	char c, sign, tmp[66];
 	char *dig = digits;
@@ -77,6 +77,7 @@ static char * number(char *str, long num, int base, int size, int precision, int
 	else{
 		while(num != 0){
 			tmp[i++] = dig[((unsigned long) num) % (unsigned) base];
+            _putc(tmp[i-1]);
 			num = ((unsigned long) num) / (unsigned) base;
 		}
 	}

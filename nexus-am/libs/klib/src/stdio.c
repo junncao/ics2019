@@ -32,6 +32,8 @@ static int skip_atoi(const char **s){
 
 static char * number(char *str, long num, int base, int size, int precision, int type)
 {
+    _putc('S');
+    _putc(size);
 	char c, sign, tmp[66];
 	char *dig = digits;
 	int i;
@@ -89,7 +91,6 @@ static char * number(char *str, long num, int base, int size, int precision, int
 			*str++ = '0';
 		}
 		else if(16 == base){
-            _putc('R');
 			*str++ = '0';
 			*str++ = digits[33];
 		}
@@ -223,7 +224,6 @@ int vsprintf(char *buf, const char *fmt, va_list args) {
 			case 'x':
 				{
 					base = 16;
-                    flags |= SPECIAL;
 					break;
 				}
 			case 'd':

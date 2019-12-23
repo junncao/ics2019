@@ -56,7 +56,7 @@ make_EHelper(system){
             writecsr(instr.csr, s0 | id_src->val);
             printf("s0:%x\n",s0);
             rtl_sr(id_dest->reg, &s0, 4);
-            printf("reg:%d\n", reg_l(id_dest->reg));
+            printf("reg:%x\n", reg_l(id_dest->reg));
             break;
         default:
             assert(0 && "Unfinished system op");

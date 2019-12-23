@@ -43,7 +43,16 @@ make_EHelper(system){
     switch(instr.funct3){
         //ecall
         case 0b0:
-            raise_intr(0, decinfo.seq_pc-4);
+            if((instr.val & ~(0x7f))==0){
+                raise_intr(0, decinfo.seq_pc-4);
+            }
+            else if(instr.val == 0x10200073){
+                decinfo.jmp_pc = decinfo.isa.sepc + 4;
+                decinfo_set_jmp(true);
+            }
+            else{
+                assert(0 && "system code unfinish");
+            }
             break;
         // csrrw
         case 0b001:

@@ -11,6 +11,7 @@ int32_t readcsr(int i){
             return decinfo.isa.sstatus;
         case 0x141:
             printf("%x\n", decinfo.isa.sepc);
+            printf("pc%x\n", decinfo.seq_pc-4);
             return decinfo.isa.sepc;
         default:
             assert(0 && "Unfinished readcsr");

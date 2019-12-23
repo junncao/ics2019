@@ -32,6 +32,9 @@ static int skip_atoi(const char **s){
 
 static char * number(char *str, long num, int base, int size, int precision, int type)
 {
+    if(base == 16){
+        printf("size:%d\n", size);
+    }
 	char c, sign, tmp[66];
 	char *dig = digits;
 	int i;

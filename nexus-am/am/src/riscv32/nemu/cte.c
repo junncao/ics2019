@@ -11,7 +11,7 @@ _Context* __am_irq_handle(_Context *c) {
   }
   printf("cause:%d\n", c->cause);
   printf("status:%d\n", c->status);
-  printf("epc:0x%x\n", c->epc);
+  printf("epc:0x%d\n", c->epc);
 
   if (user_handler) {
     _Event ev = {0};

@@ -41,7 +41,7 @@ make_EHelper(system){
     switch(instr.funct3){
         //ecall
         case 0b0:
-            raise_intr(0, cpu.pc);
+            raise_intr(0, decinfo.seq_pc-4);
             break;
         // csrrw
         case 0b001:

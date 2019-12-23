@@ -6,6 +6,7 @@ void raise_intr(uint32_t NO, vaddr_t epc) {
    * That is, use ``NO'' to index the IDT.
    */
     decinfo.isa.sepc = epc;
+    printf("%d", epc);
     decinfo.isa.scause = NO;
     decinfo.jmp_pc = decinfo.isa.stvec;
     decinfo_set_jmp(true);

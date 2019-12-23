@@ -84,7 +84,6 @@ static char * number(char *str, long num, int base, int size, int precision, int
 	}
 	if(sign) *str++ = sign;
 
-            _putc('R');
 	if(type & SPECIAL){
 		if(8 == base){
 			*str++ = '0';

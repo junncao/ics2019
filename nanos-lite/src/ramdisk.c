@@ -33,6 +33,7 @@ void init_ramdisk() {
     }
   Log("ramdisk info: start = 0x%x, end = 0x%x",
       mstart, mend);
+  Log("ramdisk info: size = %d bytes",size);
   //Log("ramdisk info: start = %p, end = %p, size = %d bytes",
    //   &ramdisk_start, &ramdisk_end, size);
 }

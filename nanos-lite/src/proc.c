@@ -24,6 +24,7 @@ void init_proc() {
 
   Log("Initializing processes...");
 
+  Log("test");
   // load program here
 
 }

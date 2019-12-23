@@ -32,10 +32,6 @@ static int skip_atoi(const char **s){
 
 static char * number(char *str, long num, int base, int size, int precision, int type)
 {
-    if(base == 16){
-        printf("size:%d\n", size);
-        printf("num:%d\n", num);
-    }
 	char c, sign, tmp[66];
 	char *dig = digits;
 	int i;
@@ -78,13 +74,9 @@ static char * number(char *str, long num, int base, int size, int precision, int
 		while(num != 0){
 			tmp[i++] = dig[((unsigned long) num) % (unsigned) base];
             if(base == 16)
-            _putc(tmp[i-1]);
-            if(base == 16)
                 num = (unsigned)num >> 4;
             else
 			    num = ((unsigned long) num) / (unsigned) base;
-            if(base == 16)
-            printf("%d\n",num);
 		}
 	}
 

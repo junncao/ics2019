@@ -1,10 +1,18 @@
 #include <am.h>
 #include <riscv32.h>
+#include <klib.h>
 
 static _Context* (*user_handler)(_Event, _Context*) = NULL;
 
 _Context* __am_irq_handle(_Context *c) {
   _Context *next = c;
+  for(int i = 0; i < 32;i++){
+      printf("gpr[%d]:0x%x\n",i,c->gpr[i]);
+  }
+  printf("cause:%d\n", c->cause);
+  printf("status:%d\n", c->status);
+  printf("epc:%d\n", c->epc);
+
   if (user_handler) {
     _Event ev = {0};
     switch (c->cause) {

@@ -54,8 +54,9 @@ make_EHelper(system){
         case 0b010:
             s0 = readcsr(instr.csr);
             writecsr(instr.csr, s0 | id_src->val);
-            printf("s0:%x",s0);
+            printf("s0:%x\n",s0);
             rtl_sr(id_dest->reg, &s0, 4);
+            printf("reg:%d\n", reg_l(id_dest->reg));
             break;
         default:
             assert(0 && "Unfinished system op");

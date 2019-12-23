@@ -79,7 +79,10 @@ static char * number(char *str, long num, int base, int size, int precision, int
 			tmp[i++] = dig[((unsigned long) num) % (unsigned) base];
             if(base == 16)
             _putc(tmp[i-1]);
-			num = ((unsigned long) num) / (unsigned) base;
+            if(base == 16)
+                num = (unsigned)num >> 4;
+            else
+			    num = ((unsigned long) num) / (unsigned) base;
             if(base == 16)
             printf("%d\n",num);
 		}

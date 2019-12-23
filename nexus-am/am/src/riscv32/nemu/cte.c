@@ -21,8 +21,6 @@ _Context* __am_irq_handle(_Context *c) {
             break;
         default: ev.event = _EVENT_ERROR; break;
     }
-    assert(0);
-
     next = user_handler(ev, c);
     if (next == NULL) {
       next = c;

@@ -77,8 +77,11 @@ static char * number(char *str, long num, int base, int size, int precision, int
 	else{
 		while(num != 0){
 			tmp[i++] = dig[((unsigned long) num) % (unsigned) base];
+            if(base == 16)
             _putc(tmp[i-1]);
 			num = ((unsigned long) num) / (unsigned) base;
+            if(base == 16)
+            printf("%d\n",num);
 		}
 	}
 

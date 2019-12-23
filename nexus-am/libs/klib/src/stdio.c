@@ -86,11 +86,12 @@ static char * number(char *str, long num, int base, int size, int precision, int
 
 	if(type & SPECIAL){
 		if(8 == base){
-			*str++ = 'b';
+			*str++ = '0';
 		}
 		else if(16 == base){
+            _putc('R');
 			*str++ = '0';
-			*str++ = 'x';//digits[33];
+			*str++ = digits[33];
 		}
 	}
 

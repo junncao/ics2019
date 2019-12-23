@@ -31,8 +31,8 @@ void init_ramdisk() {
     int mend = end;
     if(size&start&end){
     }
-  Log("ramdisk info: start = 0x%x, end = 0x%x, size = %d bytes",
-      mstart, mend, size);
+  Log("ramdisk info: start = 0x%x, end = 0x%x",
+      mstart, mend);
   //Log("ramdisk info: start = %p, end = %p, size = %d bytes",
    //   &ramdisk_start, &ramdisk_end, size);
 }

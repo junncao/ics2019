@@ -105,20 +105,6 @@ static char * number(char *str, long num, int base, int size, int precision, int
 	return str;
 }
 
-void itoa2(int num, char *s){
-	size_t i = 0;
-	char buf[16] = {'\0'};
-	while(num!=0){
-		buf[i] = '0' + num%10;
-		num /= 10;
-		i++;
-	}
-	size_t j;
-	for(j=0;j<i;j++){
-		s[j] = buf[i-1-j];
-	}
-}
-
 int printf(const char *fmt, ...) {
   //for(size_t i=0;i<strlen(fmt);i++){
 	//	_putc(fmt[i]);
@@ -237,6 +223,7 @@ int vsprintf(char *buf, const char *fmt, va_list args) {
 			case 'x':
 				{
 					base = 16;
+                    flags |= SPECIAL;
 					break;
 				}
 			case 'd':

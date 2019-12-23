@@ -86,7 +86,7 @@ static char * number(char *str, long num, int base, int size, int precision, int
 
 	if(type & SPECIAL){
 		if(8 == base){
-			*str++ = '0';
+			*str++ = 'b';
 		}
 		else if(16 == base){
 			*str++ = '0';

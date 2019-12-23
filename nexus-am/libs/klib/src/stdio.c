@@ -34,6 +34,7 @@ static char * number(char *str, long num, int base, int size, int precision, int
 {
     if(base == 16){
         printf("size:%d\n", size);
+        printf("num:%d\n", num);
     }
 	char c, sign, tmp[66];
 	char *dig = digits;

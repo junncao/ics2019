@@ -90,7 +90,7 @@ static char * number(char *str, long num, int base, int size, int precision, int
 		}
 		else if(16 == base){
 			*str++ = '0';
-			*str++ = digits[33];
+			*str++ = 'x';//digits[33];
 		}
 	}
 

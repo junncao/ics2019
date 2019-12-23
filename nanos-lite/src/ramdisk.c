@@ -27,10 +27,12 @@ void init_ramdisk() {
     int size = &ramdisk_end - &ramdisk_start;
     int start = (int)&ramdisk_start;
     int end = (int)&ramdisk_end;
+    int mstart = start;
+    int mend = end;
     if(size&start&end){
     }
-  //Log("ramdisk info: start = 0x%x, end = 0x%x, size = %d bytes",
-  //    start, end, size);
+  Log("ramdisk info: start = 0x%x, end = 0x%x, size = %d bytes",
+      mstart, mend, size);
   //Log("ramdisk info: start = %p, end = %p, size = %d bytes",
    //   &ramdisk_start, &ramdisk_end, size);
 }

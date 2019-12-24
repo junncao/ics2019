@@ -4,7 +4,6 @@
 extern size_t ramdisk_read(void *, size_t, size_t);
 extern size_t ramdisk_write(const void*, size_t, size_t);
 extern void isa_vaddr_write(uint32_t, uint32_t, int);
-extern size_t get_ramdisk_size();
 
 #ifdef __ISA_AM_NATIVE__
 # define Elf_Ehdr Elf64_Ehdr
@@ -30,11 +29,10 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
         maddr = Phdr.p_vaddr;
       }
       printf("offset:0x%x\n", Phdr.p_offset);
-      ramdisk_read((void*)Phdr.p_vaddr, Phdr.p_offset, get_ramdisk_size()); //Phdr.p_filesz);
-      for(int j = 0; j < get_ramdisk_size();j++){
-          printf("0x%x\n", *((int*)(Phdr.p_vaddr+j*4)));
+      ramdisk_read((void*)Phdr.p_vaddr, Phdr.p_offset, Phdr.p_filesz);
+      for(int j = 0; j < 10;j++){
+          printf("0x%x\n", *((int*)(Phdr.p_vaddr+0xc8+j*4)));
       }
-      return maddr;
       /*
       for(; j < Phdr.p_filesz; j++){
           ramdisk_read(&a, Phdr.p_offset + j, sizeof(char));

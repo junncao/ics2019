@@ -16,7 +16,6 @@ extern void isa_vaddr_write(uint32_t, uint32_t, int);
 static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr Ehdr;
   ramdisk_read(&Ehdr, 0, sizeof(Ehdr));
-  int maddr = 0;
   for(int i = 0;i < Ehdr.e_phnum;i++){
       Elf_Phdr Phdr;
       ramdisk_read(&Phdr, Ehdr.e_phoff + i*Ehdr.e_phentsize, sizeof(Phdr));
@@ -25,14 +24,8 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       }
       //char a;
       //unsigned int j = 0;
-      if(i==0){
-        maddr = Phdr.p_vaddr;
-      }
       printf("offset:0x%x\n", Phdr.p_offset);
       ramdisk_read((void*)Phdr.p_vaddr, Phdr.p_offset, Phdr.p_filesz);
-      for(int j = 0; j < 10;j++){
-          printf("0x%x\n", *((int*)(Phdr.p_vaddr+0xc8+j*4)));
-      }
       /*
       for(; j < Phdr.p_filesz; j++){
           ramdisk_read(&a, Phdr.p_offset + j, sizeof(char));
@@ -45,7 +38,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       }
       */
   }
-  return maddr;
+  return Ehdr.e_entry;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {

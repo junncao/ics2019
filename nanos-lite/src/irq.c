@@ -5,6 +5,9 @@ static _Context* do_event(_Event e, _Context* c) {
       case _EVENT_YIELD:
           printf("Self trap!\n");
           break;
+      case _EVENT_SYSCALL:
+          printf("Syscall!\n");
+          break;
     default: panic("Unhandled event ID = %d", e.event);
   }
 

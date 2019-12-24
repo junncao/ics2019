@@ -25,9 +25,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       }
       //char a;
       //unsigned int j = 0;
-      if(i==0){
-        maddr = Phdr.p_vaddr;
-      }
+      maddr = Phdr.p_vaddr;
       printf("offset:0x%x\n", Phdr.p_offset);
       ramdisk_read((void*)Phdr.p_vaddr, Phdr.p_offset, Phdr.p_filesz);
       for(int j = 0; j < 10;j++){

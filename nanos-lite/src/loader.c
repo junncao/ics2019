@@ -20,11 +20,18 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   for(int i = 0;i < Ehdr.e_phnum;i++){
       Elf_Phdr Phdr;
       ramdisk_read(&Phdr, Ehdr.e_phoff + i*Ehdr.e_phentsize, sizeof(Phdr));
+      if(Phdr.p_type & PT_LOAD){
+          continue;
+      }
       //char a;
       //unsigned int j = 0;
-      if(i==0)
-        maddr = Phdr.p_vaddr;
+      if(i==0){
+        maddr = Phdr.p_vaddr ;
+      }
       ramdisk_read((void*)Phdr.p_vaddr, Phdr.p_offset, Phdr.p_filesz);
+      for(int j = 0; j < 10;j++){
+          printf("0x%x ", *((int*)(Phdr.p_vaddr+i*4)));
+      }
       /*
       for(; j < Phdr.p_filesz; j++){
           ramdisk_read(&a, Phdr.p_offset + j, sizeof(char));

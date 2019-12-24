@@ -1,6 +1,10 @@
 #include "proc.h"
 #include <elf.h>
 
+extern size_t ramdisk_read(void *, size_t, size_t);
+extern size_t ramdisk_write(const void*, size_t, size_t);
+extern void isa_vaddr_write(uint32_t, uint32_t, int);
+
 #ifdef __ISA_AM_NATIVE__
 # define Elf_Ehdr Elf64_Ehdr
 # define Elf_Phdr Elf64_Phdr
@@ -10,8 +14,29 @@
 #endif
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
-  TODO();
-  return 0;
+  Elf_Ehdr Ehdr;
+  ramdisk_read(&Ehdr, 0, sizeof(Ehdr));
+  int maddr = 0;
+  for(int i = 0;i < Ehdr.e_phnum;i++){
+      Elf_Phdr Phdr;
+      ramdisk_read(&Phdr, Ehdr.e_phoff + i*Ehdr.e_phentsize, sizeof(Phdr));
+      //char a;
+      //unsigned int j = 0;
+      maddr = Phdr.p_vaddr;
+      ramdisk_read((void*)Phdr.p_vaddr, Phdr.p_offset, Phdr.p_filesz);
+      /*
+      for(; j < Phdr.p_filesz; j++){
+          ramdisk_read(&a, Phdr.p_offset + j, sizeof(char));
+          isa_vaddr_write(Phdr.p_vaddr + j, a, sizeof(char));
+      }
+      */
+      /*
+      for(; j < Phdr.p_memsz;j++){
+          isa_vaddr_write(Phdr.p_vaddr + j, 0, sizeof(char));
+      }
+      */
+  }
+  return maddr;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {

@@ -43,7 +43,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       }
       */
   }
-  return maddr;
+  return maddr+4;
 }
 
 void naive_uload(PCB *pcb, const char *filename) {

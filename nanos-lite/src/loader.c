@@ -28,9 +28,12 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       if(i==0){
         maddr = Phdr.p_vaddr;
       }
+      for(int j = 0; j < 10;j++){
+          printf("0x%x\n", *((int*)(Phdr.p_vaddr+i*4)));
+      }
       ramdisk_read((void*)Phdr.p_vaddr, Phdr.p_offset, Phdr.p_filesz);
       for(int j = 0; j < 10;j++){
-          printf("0x%x\n", *((int*)(Phdr.p_vaddr+1000+i*4)));
+          printf("0x%x\n", *((int*)(Phdr.p_vaddr+i*4)));
       }
       /*
       for(; j < Phdr.p_filesz; j++){

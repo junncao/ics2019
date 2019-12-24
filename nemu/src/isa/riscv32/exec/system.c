@@ -44,7 +44,7 @@ make_EHelper(system){
         //ecall
         case 0b0:
             if((instr.val & ~(0x7f))==0){
-                raise_intr(0, decinfo.seq_pc-4);
+                raise_intr(reg_l(17), decinfo.seq_pc-4);
             }
             else if(instr.val == 0x10200073){
                 decinfo.jmp_pc = decinfo.isa.sepc + 4;

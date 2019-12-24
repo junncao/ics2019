@@ -26,7 +26,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       //char a;
       //unsigned int j = 0;
       if(i==0){
-        maddr = Phdr.p_vaddr ;
+        maddr = Phdr.p_vaddr;
       }
       ramdisk_read((void*)Phdr.p_vaddr, Phdr.p_offset, Phdr.p_filesz);
       for(int j = 0; j < 10;j++){
@@ -50,6 +50,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 void naive_uload(PCB *pcb, const char *filename) {
   uintptr_t entry = loader(pcb, filename);
   Log("Jump to entry = %x", entry);
+  return;
   ((void(*)())entry) ();
 }
 

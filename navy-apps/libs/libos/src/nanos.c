@@ -61,7 +61,7 @@ int _open(const char *path, int flags, mode_t mode) {
 }
 
 int _write(int fd, void *buf, size_t count) {
-  int ret = _syscall_(SYS_write, fd, buf, count);
+  int ret = _syscall_(SYS_write, fd, (intptr_t)buf, count);
   //_exit(SYS_write);
   return ret;
 }
@@ -72,6 +72,7 @@ void *_sbrk(intptr_t increment) {
         programBrk = _end;
     }
     int ret = programBrk;
+    _write(1, "test\n", 5);
     if(!_syscall_(SYS_brk, programBrk + increment, 0, 0)){
         programBrk += increment;
         return (void *)ret;

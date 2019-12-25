@@ -32,11 +32,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   int fd = fs_open(filename, 0, 0);
   fs_lseek(fd, 0, 0);
   fs_read(fd, (void*)Phdr.p_vaddr, Phdr.p_filesz);
-
-      printf("NOTE:\n");
-      for(int i = 0; i< Phdr.p_filesz;i++){
-          printf("%x\n", *((int *)(Phdr.p_vaddr+i*4)));
-      }
   return Ehdr.e_entry;
 }
 

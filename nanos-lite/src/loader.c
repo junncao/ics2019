@@ -18,8 +18,8 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr Ehdr;
   int fd = fs_open(filename, 0, 0);
   fs_lseek(fd, 0, 0);
-  fs_read(fd, 0, sizeof(Ehdr));
-  ramdisk_read(&Ehdr, 0, sizeof(Ehdr));
+  fs_read(fd, &Ehdr, sizeof(Ehdr));
+  //ramdisk_read(&Ehdr, 0, sizeof(Ehdr));
   for(int i = 0; i < Ehdr.e_phnum;i++){
       Elf_Phdr Phdr;
       //fs_lseek()

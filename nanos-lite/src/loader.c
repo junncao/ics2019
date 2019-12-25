@@ -1,4 +1,5 @@
 #include "proc.h"
+#include "fs.h"
 #include <elf.h>
 
 extern size_t ramdisk_read(void *, size_t, size_t);
@@ -16,27 +17,18 @@ extern void isa_vaddr_write(uint32_t, uint32_t, int);
 static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr Ehdr;
   ramdisk_read(&Ehdr, 0, sizeof(Ehdr));
+  /*
   for(int i = 0;i < Ehdr.e_phnum;i++){
       Elf_Phdr Phdr;
       ramdisk_read(&Phdr, Ehdr.e_phoff + i*Ehdr.e_phentsize, sizeof(Phdr));
       if(!(Phdr.p_type & PT_LOAD)){
           continue;
       }
-      //char a;
-      //unsigned int j = 0;
       ramdisk_read((void*)Phdr.p_vaddr, Phdr.p_offset, Phdr.p_filesz);
-      /*
-      for(; j < Phdr.p_filesz; j++){
-          ramdisk_read(&a, Phdr.p_offset + j, sizeof(char));
-          isa_vaddr_write(Phdr.p_vaddr + j, a, sizeof(char));
-      }
-      */
-      /*
-      for(; j < Phdr.p_memsz;j++){
-          isa_vaddr_write(Phdr.p_vaddr + j, 0, sizeof(char));
-      }
-      */
   }
+  */
+  int fd = fs_open(filename, 0, 0);
+  fs_read(fd, (void*)(0x83000000), -1);
   return Ehdr.e_entry;
 }
 

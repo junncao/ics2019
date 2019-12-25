@@ -25,7 +25,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       }
       ramdisk_read((void*)Phdr.p_vaddr, Phdr.p_offset, Phdr.p_filesz);
       printf("NOTE:\n");
-      for(int i = 0; i< 10000;i++){
+      for(int i = 0; i< Phdr.p_filesz;i++){
           printf("%x\n", *((int *)(Phdr.p_vaddr+i*4)));
       }
   }

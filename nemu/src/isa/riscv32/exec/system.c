@@ -4,7 +4,6 @@ extern void raise_intr(uint32_t, vaddr_t);
 int32_t readcsr(int i){
     switch(i){
         case 0x105:
-            printf("stvec:%x\n", decinfo.isa.stvec);
             return decinfo.isa.stvec;
         case 0x142:
             return decinfo.isa.scause;
@@ -40,11 +39,6 @@ void writecsr(int i, int32_t val){
 }
 
 make_EHelper(system){
-    static int count = 0;
-    if(count == 0){
-        count = 1;
-        decinfo.isa.stvec = 0;
-    }
     Instr instr = decinfo.isa.instr;
     switch(instr.funct3){
         //ecall

@@ -72,8 +72,6 @@ void *_sbrk(intptr_t increment) {
         programBrk = &end;
     }
     int ret = programBrk;
-    char tmp[100];
-    printf("brk:%d, incre:%d\n", programBrk, increment);
     if(!_syscall_(SYS_brk, programBrk + increment, 0, 0)){
         programBrk += increment;
         return (void *)ret;

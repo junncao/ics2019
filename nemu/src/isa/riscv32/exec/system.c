@@ -39,6 +39,11 @@ void writecsr(int i, int32_t val){
 }
 
 make_EHelper(system){
+    static int count = 0;
+    if(count == 0){
+        count = 1;
+        decinfo.isa.stvec = 0;
+    }
     Instr instr = decinfo.isa.instr;
     switch(instr.funct3){
         //ecall

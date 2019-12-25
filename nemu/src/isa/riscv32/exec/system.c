@@ -65,6 +65,7 @@ make_EHelper(system){
             s0 = readcsr(instr.csr);
             writecsr(instr.csr, id_src->val);
             rtl_sr(id_dest->reg, &s0, 4);
+            printf("reg:%d\n", reg_l(id_dest->reg));
             break;
         case 0b010:
             s0 = readcsr(instr.csr);

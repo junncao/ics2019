@@ -17,7 +17,7 @@ extern void isa_vaddr_write(uint32_t, uint32_t, int);
 static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr Ehdr;
   ramdisk_read(&Ehdr, 0, sizeof(Ehdr));
-  for(int i = 0;i < 1 && i < Ehdr.e_phnum;i++){
+  for(int i = 0; i < Ehdr.e_phnum;i++){
       Elf_Phdr Phdr;
       ramdisk_read(&Phdr, Ehdr.e_phoff + i*Ehdr.e_phentsize, sizeof(Phdr));
       if(!(Phdr.p_type & PT_LOAD)){

@@ -21,8 +21,8 @@ int do_write(int fd, const void*buf, size_t count){
     if(fd==1 || fd==2){
         for(int i = 0;i < count;i++){
             _putc(((char*)buf)[i]);
-            return count;
         }
+        return count;
     }
     if(fd==0)
         return 0;

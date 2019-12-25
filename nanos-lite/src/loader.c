@@ -23,12 +23,14 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   for(int i = 0; i < Ehdr.e_phnum;i++){
       Elf_Phdr Phdr;
       fs_lseek(fd, Ehdr.e_phoff + i*Ehdr.e_phentsize, SEEK_SET);
-      //ramdisk_read(&Phdr, Ehdr.e_phoff + i*Ehdr.e_phentsize, sizeof(Phdr));
       fs_read(fd, &Phdr, sizeof(Phdr));
+      //ramdisk_read(&Phdr, Ehdr.e_phoff + i*Ehdr.e_phentsize, sizeof(Phdr));
       if(!(Phdr.p_type & PT_LOAD)){
           continue;
       }
-      ramdisk_read((void*)Phdr.p_vaddr, Phdr.p_offset, Phdr.p_filesz);
+      fs_lseek(fd, Phdr.p_offset, SEEK_SET);
+      fs_read(fd, (void*)Phdr.p_vaddr, Phdr.p_filesz);
+      //ramdisk_read((void*)Phdr.p_vaddr, Phdr.p_offset, Phdr.p_filesz);
   }
 
   return Ehdr.e_entry;

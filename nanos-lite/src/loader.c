@@ -16,23 +16,20 @@ extern void isa_vaddr_write(uint32_t, uint32_t, int);
 
 static uintptr_t loader(PCB *pcb, const char *filename) {
   Elf_Ehdr Ehdr;
+  int fd = fs_open(filename, 0, 0);
+  fs_lseek(fd, 0, 0);
+  fs_read(fd, 0, sizeof(Ehdr));
   ramdisk_read(&Ehdr, 0, sizeof(Ehdr));
   for(int i = 0; i < Ehdr.e_phnum;i++){
       Elf_Phdr Phdr;
-      ramdisk_read(&Phdr, Ehdr.e_phoff + i*Ehdr.e_phentsize, sizeof(Phdr));
+      fs_lseek(Ehdr.e_phoff + i*Ehdr.e_phentsize, 0, 0);
+      fs_read(fd, &Phdr, sizeof(Phdr));
       if(!(Phdr.p_type & PT_LOAD)){
           continue;
       }
       ramdisk_read((void*)Phdr.p_vaddr, Phdr.p_offset, Phdr.p_filesz);
   }
 
-  Elf_Phdr Phdr;
-  ramdisk_read(&Phdr, Ehdr.e_phoff + 0*Ehdr.e_phentsize, sizeof(Phdr));
-  int fd = fs_open(filename, 0, 0);
-  fs_lseek(fd, 0, 0);
-  printf("%x\n", Phdr.p_filesz);
-  int res = fs_read(fd, (void*)Phdr.p_vaddr, 0x5657);
-  printf("%x\n", res);
   return Ehdr.e_entry;
 }
 

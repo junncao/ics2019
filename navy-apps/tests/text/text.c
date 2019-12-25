@@ -1,9 +1,9 @@
+#include <unistd.h>
 #include <stdio.h>
 #include <assert.h>
 
 int main() {
-    return 0;
-  printf("test1");
+  printf("test1\n");
   FILE *fp = fopen("/share/texts/num", "r+");
   assert(fp);
 

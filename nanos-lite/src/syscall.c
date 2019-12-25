@@ -4,6 +4,11 @@
 
 static int programBrk;
 
+int do_open(const char*path, int flags, int mode){
+    int res = fs_open(path, flags, mode);
+    return res;
+}
+
 int do_close(int fd){
     int res = fs_close(fd);
     return res;
@@ -63,6 +68,9 @@ _Context* do_syscall(_Context *c) {
           break;
       case SYS_lseek:
           c->GPRx = do_lseek(a[1], a[2], a[3]);
+          break;
+      case SYS_open:
+          c->GPRx = do_open((const char *)a[1], a[2], a[3]);
           break;
       case SYS_close:
           c->GPRx = do_close(a[1]);

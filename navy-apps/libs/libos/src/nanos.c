@@ -67,6 +67,7 @@ int _write(int fd, void *buf, size_t count) {
 }
 
 void *_sbrk(intptr_t increment) {
+    return (void*)-1;
     static int programBrk = 0;
     if(programBrk == 0){
         programBrk = &end;

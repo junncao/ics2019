@@ -6,6 +6,8 @@
 #include <time.h>
 #include "syscall.h"
 
+extern uint32_t _end;
+
 // helper macros
 #define _concat(x, y) x ## y
 #define concat(x, y) _concat(x, y)
@@ -65,7 +67,16 @@ int _write(int fd, void *buf, size_t count) {
 }
 
 void *_sbrk(intptr_t increment) {
-  return (void *)-1;
+    static int programBrk = 0;
+    if(programBrk == 0){
+        programBrk = _end;
+    }
+    int ret = programBrk;
+    if(!_syscall_(SYS_brk, programBrk + increment, 0, 0)){
+        programBrk += increment;
+        return (void *)ret;
+    }
+    return (void *)-1;
 }
 
 int _read(int fd, void *buf, size_t count) {

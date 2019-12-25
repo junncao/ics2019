@@ -4,6 +4,7 @@ extern void raise_intr(uint32_t, vaddr_t);
 int32_t readcsr(int i){
     switch(i){
         case 0x105:
+            printf("stvec:%x\n", decinfo.isa.stvec);
             return decinfo.isa.stvec;
         case 0x142:
             return decinfo.isa.scause;

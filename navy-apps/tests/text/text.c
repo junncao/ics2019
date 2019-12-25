@@ -3,14 +3,12 @@
 #include <assert.h>
 
 int main() {
-  printf("test1\n");
   FILE *fp = fopen("/share/texts/num", "r+");
   assert(fp);
-  printf("test2\n");
 
-  fseek(fp, 0, SEEK_END);
-  long size = ftell(fp);
-  assert(size == 5000);
+  //fseek(fp, 0, SEEK_END);
+  //long size = ftell(fp);
+  //assert(size == 5000);
 
   fseek(fp, 500 * 5, SEEK_SET);
   int i, n;

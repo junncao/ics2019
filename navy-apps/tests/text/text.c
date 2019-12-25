@@ -6,6 +6,7 @@ int main() {
   printf("test1\n");
   FILE *fp = fopen("/share/texts/num", "r+");
   assert(fp);
+  printf("test2\n");
 
   fseek(fp, 0, SEEK_END);
   long size = ftell(fp);

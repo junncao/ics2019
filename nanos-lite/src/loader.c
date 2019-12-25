@@ -24,20 +24,19 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
           continue;
       }
       ramdisk_read((void*)Phdr.p_vaddr, Phdr.p_offset, Phdr.p_filesz);
-      printf("NOTE:\n");
-      for(int i = 0; i< Phdr.p_filesz;i++){
-          printf("%x\n", *((int *)(Phdr.p_vaddr+i*4)));
-      }
   }
 
 
-  /*
   Elf_Phdr Phdr;
   ramdisk_read(&Phdr, Ehdr.e_phoff + 0*Ehdr.e_phentsize, sizeof(Phdr));
   int fd = fs_open(filename, 0, 0);
   fs_lseek(fd, 0, 0);
-  fs_read(fd, (void*)Phdr.p_vaddr, -1);
-  */
+  fs_read(fd, (void*)Phdr.p_vaddr, Phdr.p_filesz);
+
+      printf("NOTE:\n");
+      for(int i = 0; i< Phdr.p_filesz;i++){
+          printf("%x\n", *((int *)(Phdr.p_vaddr+i*4)));
+      }
   return Ehdr.e_entry;
 }
 

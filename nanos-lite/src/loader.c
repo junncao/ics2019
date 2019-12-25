@@ -24,7 +24,6 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
           continue;
       }
       ramdisk_read((void*)Phdr.p_vaddr, Phdr.p_offset, Phdr.p_filesz);
-      printf("num:%d\n");
   }
 
   Elf_Phdr Phdr;

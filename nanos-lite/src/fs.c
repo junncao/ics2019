@@ -45,6 +45,7 @@ int fs_open(const char *pathname, int flags, int mode){
 }
 
 size_t fs_read(int fd, void *buf, size_t len){
+    printf("test\n");
     if(file_table[fd].open_offset+len > file_table[fd].size){
         if(file_table[fd].size > file_table[fd].open_offset)
             len = file_table[fd].size - file_table[fd].open_offset;

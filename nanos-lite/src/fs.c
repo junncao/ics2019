@@ -80,7 +80,7 @@ size_t fs_lseek(int fd, size_t offset, int whence){
             file_table[fd].open_offset = file_table[fd].size + offset;
             break;
     }
-    return offset;
+    return file_table[fd].open_offset;
 }
 
 int fs_close(int fd){

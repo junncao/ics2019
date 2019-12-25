@@ -57,6 +57,9 @@ void cpu_exec(uint64_t n) {
   else if((instr&0x7f) == 0b1101011){
       difftest_skip_ref();
   }
+  else if((instr&0x7f) == 0b1110011){
+      difftest_skip_ref();
+  }
   difftest_step(ori_pc, cpu.pc);
 #endif
 

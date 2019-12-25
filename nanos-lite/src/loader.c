@@ -30,6 +30,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   ramdisk_read(&Phdr, Ehdr.e_phoff + 0*Ehdr.e_phentsize, sizeof(Phdr));
   int fd = fs_open(filename, 0, 0);
   fs_lseek(fd, 0, 0);
+  printf("%x\n", Phdr.p_filesz);
   fs_read(fd, (void*)Phdr.p_vaddr, 0xffff);
   return Ehdr.e_entry;
 }

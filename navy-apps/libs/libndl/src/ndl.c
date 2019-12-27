@@ -60,11 +60,13 @@ int NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
       printf("d\n");
     }
   } else {
+      printf("test1\n");
     for (int i = 0; i < h; i ++) {
       for (int j = 0; j < w; j ++) {
         canvas[(i + y) * canvas_w + (j + x)] = pixels[i * w + j];
       }
     }
+      printf("test2\n");
   }
 }
 

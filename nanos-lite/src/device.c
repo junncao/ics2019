@@ -35,6 +35,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
         if(!kbd.keydown)
             tmp[1] = 'u';
         sprintf(buf+offset,"%s %s\n",tmp,keyname[kbd.keycode]);
+        printf("%s", buf+offset);
     }
   return 0;
 }

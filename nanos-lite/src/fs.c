@@ -68,7 +68,6 @@ size_t fs_read(int fd, void *buf, size_t len){
     else{
         len = file_table[fd].read(buf, file_table[fd].disk_offset + file_table[fd].open_offset, len);
     }
-    if(fd!=6)
         file_table[fd].open_offset += len;
     return len;
 }

@@ -29,6 +29,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
         _DEV_TIMER_UPTIME_t timer;
         __am_timer_read(_DEVREG_TIMER_UPTIME, &timer, 0);
         sprintf(buf+offset,"t %d\n", timer.lo);
+        printf("%s", buf+offset);
     }
     else{
         if(!kbd.keydown)

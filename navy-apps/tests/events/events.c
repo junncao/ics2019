@@ -18,9 +18,9 @@ int main() {
     int is_time = buf[0] == 't';
     time += is_time;
     if (!is_time) {
-      printf("myreceive event: %s", buf);
+      printf("receive event: %s", buf);
     }
-    else if (time % 4 == 0) {
+    else if (time) {
       printf("receive time event for the %dth time: %s", time, buf);
     }
   }

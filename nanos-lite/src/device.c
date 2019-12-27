@@ -43,6 +43,7 @@ static char dispinfo[128] __attribute__((used)) = {};
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
     sprintf(buf, dispinfo + offset, len);
+    printf("%s", buf);
   return len;
 }
 

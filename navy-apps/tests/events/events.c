@@ -20,7 +20,7 @@ int main() {
     if (!is_time) {
       printf("receive event: %s", buf);
     }
-    else if (time) {
+    else if (time % 1024 == 0) {
       printf("receive time event for the %dth time: %s", time, buf);
     }
   }

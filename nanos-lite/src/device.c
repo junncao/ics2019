@@ -28,7 +28,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
     if(kbd.keycode == _KEY_NONE){
         _DEV_TIMER_UPTIME_t timer;
         __am_timer_read(_DEVREG_TIMER_UPTIME, &timer, 0);
-        sprintf(buf+offset,"t %d\n", timer.lo);
+        sprintf(buf,"t %d\n", timer.lo);
     }
     else{
         if(!kbd.keydown)

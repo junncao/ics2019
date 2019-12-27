@@ -31,7 +31,6 @@ int NDL_OpenDisplay(int w, int h) {
     evtdev = stdin;
   } else {
     get_display_info();
-    assert(0);
     assert(screen_w >= canvas_w);
     assert(screen_h >= canvas_h);
     pad_x = (screen_w - canvas_w) / 2;
@@ -142,6 +141,7 @@ static void get_display_info() {
     if (strcmp(key, "WIDTH") == 0) sscanf(value, "%d", &screen_w);
     if (strcmp(key, "HEIGHT") == 0) sscanf(value, "%d", &screen_h);
   }
+    assert(0);
   fclose(dispinfo);
   assert(screen_w > 0 && screen_h > 0);
 }

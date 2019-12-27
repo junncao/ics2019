@@ -23,6 +23,7 @@ static const char *keyname[256] __attribute__((used)) = {
 
 size_t events_read(void *buf, size_t offset, size_t len) {
         sprintf(buf,"t %d\n", 1234);
+        printf("%s\n", buf);
         return 1;
     _DEV_INPUT_KBD_t kbd;
     __am_input_read(_DEVREG_INPUT_KBD, &kbd, 0);

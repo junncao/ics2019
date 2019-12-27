@@ -27,13 +27,13 @@ size_t events_read(void *buf, size_t offset, size_t len) {
     if((kc & 0xfff) == _KEY_NONE){
         int time = uptime();
         sprintf(buf,"t %d\n", time);
-        printf("%s", buf+offset);
+        printf("%s", buf);
     }
     else{
         if(kc&0x8000)
             tmp[1] = 'd';
         sprintf(buf,"%s %s\n",tmp,keyname[kc&0xfff]);
-        printf("%s", buf+offset);
+        printf("%s", buf);
     }
   return 0;
 }

@@ -9,6 +9,7 @@
 
 void cpu_exec(uint64_t);
 extern WP *head;
+extern void isa_reg_display();
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {

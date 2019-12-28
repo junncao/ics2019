@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <regex.h>
 
+extern uint32_t isa_reg_str2val(const char *s, bool *success);
 int calculate(int i, int j, bool *success);
 bool check_parentheses(int i, int j);
 
@@ -97,10 +98,10 @@ static bool make_token(char *e) {
             if(substr_len >= 32){
               printf("number is too big!\n");
               assert(0);
-            } 
+            }
             for(int j = 0; j < substr_len; j++){
               tokens[nr_token].str[j] = substr_start[j];
-            } 
+            }
             tokens[nr_token].str[substr_len] = 0;
           default:
             tokens[nr_token].type = rules[i].token_type;
@@ -148,13 +149,13 @@ int calculate(int i, int j, bool *success){
     *success = true;
 
     if(tokens[i].type == TK_REG)
-      number = isa_reg_str2val(&(tokens[i].str[1]), success); 
+      number = isa_reg_str2val(&(tokens[i].str[1]), success);
     else if(tokens[i].type == TK_NUM)
       sscanf(tokens[i].str, "%d", &number);
     else
       sscanf(&(tokens[i].str[2]), "%x", &number); //delete "0x"
     //printf("%s number: %d\n", tokens[i].str, number);
-    return number; 
+    return number;
   }
   else if(tokens[i].type == DEREF){
     int addr = calculate(i+1, j, success);

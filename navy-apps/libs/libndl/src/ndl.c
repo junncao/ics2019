@@ -59,13 +59,11 @@ int NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
       printf("d\n");
     }
   } else {
-      printf("test1\n");
     for (int i = 0; i < h; i ++) {
       for (int j = 0; j < w; j ++) {
         canvas[(i + y) * canvas_w + (j + x)] = pixels[i * w + j];
       }
     }
-      printf("test2\n");
   }
 }
 
@@ -140,7 +138,6 @@ static void get_display_info() {
     sscanf(delim + 1, "%s", value);
     if (strcmp(key, "WIDTH") == 0) sscanf(value, "%d", &screen_w);
     if (strcmp(key, "HEIGHT") == 0) sscanf(value, "%d", &screen_h);
-    printf("%d %d\n", screen_w, screen_h);
   }
   fclose(dispinfo);
   assert(screen_w > 0 && screen_h > 0);

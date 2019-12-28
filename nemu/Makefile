@@ -63,7 +63,7 @@ override ARGS ?= -l $(BUILD_DIR)/nemu-log.txt
 override ARGS += -d $(QEMU_SO)
 
 # Command to execute NEMU
-IMG :=
+IMG := hello-riscv32
 NEMU_EXEC := $(BINARY) $(ARGS) $(IMG)
 
 $(BINARY): $(OBJS)

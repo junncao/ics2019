@@ -8,6 +8,7 @@ int main() {
   assert(bmp->pixels);
   NDL_OpenDisplay(bmp->w, bmp->h);
   NDL_DrawRect(bmp->pixels, 0, 0, bmp->w, bmp->h);
+  assert(0);
   NDL_Render();
   NDL_CloseDisplay();
   while (1);

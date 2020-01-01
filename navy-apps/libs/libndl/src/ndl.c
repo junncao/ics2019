@@ -12,7 +12,7 @@ static void get_display_info();
 static int canvas_w, canvas_h, screen_w, screen_h, pad_x, pad_y;
 
 int NDL_OpenDisplay(int w, int h) {
-  if (!canvas) {
+  if (canvas) {
     NDL_CloseDisplay();
   }
 

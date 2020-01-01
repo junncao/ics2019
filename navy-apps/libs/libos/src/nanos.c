@@ -101,7 +101,8 @@ off_t _lseek(int fd, off_t offset, int whence) {
 
 int _execve(const char *fname, char * const argv[], char *const envp[]) {
   _exit(SYS_execve);
-  return 0;
+  int ret = _syscall_(SYS_execve, fname, (intptr_t)argv, (intptr_t)envp);
+  return ret;
 }
 
 // The code below is not used by Nanos-lite.

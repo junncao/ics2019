@@ -73,6 +73,7 @@ int main(int argc, char *argv[], char *envp[]) {
     //exit(1);
   }
 
+    printf("test2\n");
   open_display();
 
   evtdev = fopen("/dev/events", "r");

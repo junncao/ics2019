@@ -1,7 +1,9 @@
 #include "common.h"
 #include "fs.h"
+#include "proc.h"
 #include "syscall.h"
 
+extern void naive_uload(PCB *pcb, const char *filename);
 static int programBrk;
 
 int do_open(const char*path, int flags, int mode){
@@ -56,7 +58,8 @@ _Context* do_syscall(_Context *c) {
 
   switch (a[0]) {
       case SYS_exit:
-          _halt(a[1]);
+          naive_uload(NULL,"/bin/init");
+          //_halt(a[1]);
           break;
       case SYS_yield:
           _yield();
@@ -79,6 +82,11 @@ _Context* do_syscall(_Context *c) {
           break;
       case SYS_brk:
           c->GPRx = do_brk(a[1]);
+          break;
+      case SYS_execve:
+          naive_uload(NULL, (const char*)a[1]);
+          c->GPR2 = SYS_exit;
+          do_syscall(c);
           break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }

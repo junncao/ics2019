@@ -69,7 +69,7 @@ int main(int argc, char *argv[], char *envp[]) {
       !freopen("/dev/tty", "w", stdout) ||
       !freopen("/dev/tty", "w", stderr)) {
     // the OS does not meet the spec
-    exit(1);
+    //exit(1);
   }
 
   open_display();

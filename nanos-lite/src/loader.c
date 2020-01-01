@@ -31,6 +31,9 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
       }
       fs_lseek(fd, Phdr.p_offset, SEEK_SET);
       fs_read(fd, (void*)Phdr.p_vaddr, Phdr.p_filesz);
+      for(unsigned int i = Phdr.p_filesz; i < Phdr.p_memsz;i++){
+          ((char*)Phdr.p_vaddr)[i] = 0;
+      }
       //ramdisk_read((void*)Phdr.p_vaddr, Phdr.p_offset, Phdr.p_filesz);
   }
 

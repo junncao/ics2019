@@ -37,10 +37,10 @@ static Finfo file_table[] __attribute__((used)) = {
   {"stdin", 0, 0, 0, invalid_read, invalid_write},
   {"stdout", 0, 0, 0, invalid_read, serial_write},
   {"stderr", 0, 0, 0, invalid_read, serial_write},
+  {"/dev/tty", 0, 0, 0, invalid_read, serial_write},
   {"/dev/events", 0xffffff, 0, 0, events_read, invalid_write},
   {"/dev/fb", 0, 0, 0, invalid_read, fb_write},
   {"/dev/fbsync", 0xffff, 0, 0, invalid_read, fbsync_write},
-  //{"/dev/tty", 0, 0, 0, invalid_read, serial_write},
   {"/proc/dispinfo", 128, 0, 0, dispinfo_read, invalid_write},
 #include "files.h"
 };
@@ -57,7 +57,7 @@ int fs_open(const char *pathname, int flags, int mode){
 }
 
 size_t fs_read(int fd, void *buf, size_t len){
-    if(fd>=3 &&(file_table[fd].open_offset+len >= file_table[fd].size)){
+    if(fd>=4 &&(file_table[fd].open_offset+len >= file_table[fd].size)){
         if(file_table[fd].size > file_table[fd].open_offset)
             len = file_table[fd].size - file_table[fd].open_offset;
         else

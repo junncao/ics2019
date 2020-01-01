@@ -66,14 +66,12 @@ static void display_menu(int n);
 
 int main(int argc, char *argv[], char *envp[]) {
     printf("test\n");
-    /*
   if (!freopen("/dev/tty", "r", stdin) ||
       !freopen("/dev/tty", "w", stdout) ||
       !freopen("/dev/tty", "w", stderr)) {
     // the OS does not meet the spec
-    //exit(1);
+    exit(1);
   }
-  */
 
     printf("test2\n");
   open_display();

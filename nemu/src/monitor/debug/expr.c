@@ -12,7 +12,7 @@ bool check_parentheses(int i, int j);
 
 enum {
   TK_NOTYPE = 256, TK_EQ, TK_NUM, TK_HEXNUM,
-  TK_REG, TK_NEQ, TK_AND, DEREF,
+  TK_REG, TK_NEQ, TK_AND, DEREF,REV
 
 };
 
@@ -133,6 +133,9 @@ uint32_t expr(char *e, bool *success) {
     if(tokens[i].type == '*' && (i==0 || (tokens[i-1].type == '+')|| (tokens[i-1].type == '-')|| (tokens[i-1].type == '(') || (tokens[i-1].type == '*'))){
       tokens[i].type = DEREF;
     }
+    if(tokens[i].type == '-' && (i==0 || (tokens[i-1].type == '+')|| (tokens[i-1].type == '-')|| (tokens[i-1].type == '('))){
+      tokens[i].type = REV;
+    }
   }
   return calculate(0, nr_token-1, success);
 }
@@ -208,6 +211,10 @@ int calculate(int i, int j, bool *success){
             op = k;
             flag = 5;
         }
+        if(flag == 6 &&(tokens[k].type == REV)){
+            op = k;
+            flag = 6;
+        }
       }
     }
 
@@ -223,6 +230,15 @@ int calculate(int i, int j, bool *success){
         }
         return paddr_read(addr, 4);
     }
+
+    if(flag == 6){
+        int val = calculate(i+1, j, success);
+        if(!(*success)){
+          return 0;
+        }
+        return -val;
+    }
+
     value1 = calculate(i, op-1, &success1);
     value2 = calculate(op+1, j, &success2);
     if(!success1 || !success2){

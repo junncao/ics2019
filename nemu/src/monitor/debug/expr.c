@@ -203,15 +203,15 @@ int calculate(int i, int j, bool *success){
           op = k;
           flag = 3;
         }
-        if(flag == 4 && (tokens[k].type == TK_AND)){
+        if(flag >= 4 && (tokens[k].type == TK_AND)){
           op = k;
           flag = 4;
         }
-        if(flag == 5 &&(tokens[k].type == DEREF)){
+        if(flag >= 5 &&(tokens[k].type == DEREF)){
             op = k;
             flag = 5;
         }
-        if(flag == 6 &&(tokens[k].type == REV)){
+        if(flag >= 6 &&(tokens[k].type == REV)){
             op = k;
             flag = 6;
         }

@@ -179,7 +179,7 @@ int calculate(int i, int j, bool *success){
     //printf("i = %d, j = %d\n", i, j);
     //printf("type = %d, * = %d\n", tokens[1].type, '*');
     int bracketNum = 0, op = -1; // op is the position of main opcode
-    int flag = 5; // flag is 1 only when the main opcode is * or /
+    int flag = 6; // flag is 1 only when the main opcode is * or /
     bool success1, success2;
     int value1, value2;
     // &&  <   !=,==  <  *,/  <  +,-

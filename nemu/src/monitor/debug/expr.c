@@ -159,6 +159,7 @@ int calculate(int i, int j, bool *success){
     //printf("%s number: %d\n", tokens[i].str, number);
     return number;
   }
+  /*
   else if(tokens[i].type == DEREF){
     int addr = calculate(i+1, j, success);
     if(!(*success)){
@@ -166,6 +167,7 @@ int calculate(int i, int j, bool *success){
     }
     return paddr_read(addr, 4);
   }
+  */
   else if(check_parentheses(i,j)){
     return calculate(i+1, j-1, success);
   }
@@ -174,7 +176,7 @@ int calculate(int i, int j, bool *success){
     //printf("i = %d, j = %d\n", i, j);
     //printf("type = %d, * = %d\n", tokens[1].type, '*');
     int bracketNum = 0, op = -1; // op is the position of main opcode
-    int flag = 4; // flag is 1 only when the main opcode is * or /
+    int flag = 5; // flag is 1 only when the main opcode is * or /
     bool success1, success2;
     int value1, value2;
     // &&  <   !=,==  <  *,/  <  +,-
@@ -202,6 +204,10 @@ int calculate(int i, int j, bool *success){
           op = k;
           flag = 4;
         }
+        if(flag == 5 &&(tokens[k].type == DEREF)){
+            op = k;
+            flag = 5;
+        }
       }
     }
 
@@ -210,6 +216,13 @@ int calculate(int i, int j, bool *success){
       return 0;
     }
 
+    if(flag == 5){
+        int addr = calculate(i+1, j, success);
+        if(!(*success)){
+          return 0;
+        }
+        return paddr_read(addr, 4);
+    }
     value1 = calculate(i, op-1, &success1);
     value2 = calculate(op+1, j, &success2);
     if(!success1 || !success2){

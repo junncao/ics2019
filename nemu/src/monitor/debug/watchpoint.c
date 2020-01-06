@@ -4,7 +4,8 @@
 #define NR_WP 32
 
 static WP wp_pool[NR_WP] = {};
-static WP *head = NULL, *free_ = NULL;
+WP *head = NULL;
+static WP *free_ = NULL;
 
 void init_wp_pool() {
   int i;
@@ -18,6 +19,42 @@ void init_wp_pool() {
   free_ = wp_pool;
 }
 
-/* TODO: Implement the functionality of watchpoint */
+WP* new_wp(){
+  if(!free_){
+    printf("Wp_pool is empty!\n");
+    assert(0);
+  }
+  WP *tmp = free_;
+  free_ = free_->next;
+  tmp->next = head;
+  head = tmp;
+  return tmp;
+}
 
+void free_wp(WP *wp){
+  if(!wp)
+    return;
+  //delete wp from wp list
+  int flag = 0;
+  WP *tmp = head;
+  for(;tmp;tmp = tmp->next, flag++){
+    if(tmp == wp)
+      break;
+  }
+  //haven't found wp, no need to delete
+  if(!tmp)
+    return;
+  //wp is the first element in wp list
+  if(flag == 0)
+    head = head->next;
+  else{
+    tmp = head;
+    for(int i = 0; i < flag-1; i++){
+      tmp = tmp->next;
+    }
+    tmp->next = tmp->next->next;
+  }
+  wp->next = free_;
+  free_ = wp;
+}
 

@@ -30,8 +30,10 @@ make_DHelper(U) {
 }
 
 make_DHelper(ld) {
+  Instr instr = decinfo.isa.instr;
+  s0 = (signed)(instr.simm11_0);
   decode_op_r(id_src, decinfo.isa.instr.rs1, true);
-  decode_op_i(id_src2, decinfo.isa.instr.simm11_0, true);
+  decode_op_i(id_src2, s0, true);
 
   print_Dop(id_src->str, OP_STR_SIZE, "%d(%s)", id_src2->val, reg_name(id_src->reg, 4));
 
@@ -51,3 +53,51 @@ make_DHelper(st) {
 
   decode_op_r(id_dest, decinfo.isa.instr.rs2, true);
 }
+
+make_DHelper(CALUI) {
+  decode_op_r(id_src, decinfo.isa.instr.rs1, true);
+  decode_op_r(id_dest, decinfo.isa.instr.rd, false);
+  //TODO: maybe need add signed extend
+  //TODO: ADD comment for all new DHelper
+
+}
+
+make_DHelper(AUP) {
+  decode_op_i(id_src, decinfo.isa.instr.imm31_12 << 12, true);
+  decode_op_r(id_dest, decinfo.isa.instr.rd, false);
+}
+
+make_DHelper(CALU) {
+  decode_op_r(id_src, decinfo.isa.instr.rs1, true);
+  decode_op_r(id_src2, decinfo.isa.instr.rs2, true);
+  decode_op_r(id_dest, decinfo.isa.instr.rd, false);
+}
+
+make_DHelper(JAL) {
+  Instr instr = decinfo.isa.instr;
+  s0 = (instr.simm20<<20) + (instr.imm19_12<<12) + (instr.imm11_<<11) + (instr.imm10_1<<1);
+  decode_op_i(id_src, s0, true);
+  decode_op_r(id_dest, decinfo.isa.instr.rd, false);
+}
+
+make_DHelper(JALR) {
+  Instr instr = decinfo.isa.instr;
+  s0 = (signed)(instr.simm11_0);
+  decode_op_r(id_src, decinfo.isa.instr.rs1, true);
+  decode_op_i(id_src2, s0, true);
+  decode_op_r(id_dest, decinfo.isa.instr.rd, false);
+}
+
+make_DHelper(BRA) {
+  Instr instr = decinfo.isa.instr;
+  s0 = (instr.simm12<<12) + (instr.imm11<<11) + (instr.imm10_5<<5) + (instr.imm4_1<<1);
+  decode_op_i(id_dest, s0, true);
+  decode_op_r(id_src, decinfo.isa.instr.rs1, true);
+  decode_op_r(id_src2, decinfo.isa.instr.rs2, true);
+}
+
+make_DHelper(SYSTEM) {
+  decode_op_r(id_dest, decinfo.isa.instr.rd, false);
+  decode_op_r(id_src, decinfo.isa.instr.rs1, true);
+}
+

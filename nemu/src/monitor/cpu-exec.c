@@ -1,7 +1,9 @@
 #include "nemu.h"
 #include "monitor/monitor.h"
 #include "monitor/watchpoint.h"
+#include "monitor/expr.h"
 
+extern WP* head;
 /* The assembly code of instructions executed is only output to the screen
  * when the number of instructions executed is less than this value.
  * This is useful when you use the `si' command.
@@ -20,6 +22,8 @@ void interpret_rtl_exit(int state, vaddr_t halt_pc, uint32_t halt_ret) {
 
 vaddr_t exec_once(void);
 void difftest_step(vaddr_t ori_pc, vaddr_t next_pc);
+void difftest_skip_dut(int nr_ref, int nr_dut);
+void difftest_skip_ref(void);
 void asm_print(vaddr_t ori_pc, int instr_len, bool print_flag);
 
 static uint64_t g_nr_guest_instr = 0;
@@ -45,6 +49,17 @@ void cpu_exec(uint64_t n) {
     __attribute__((unused)) vaddr_t seq_pc = exec_once();
 
 #if defined(DIFF_TEST)
+  uint32_t instr = vaddr_read(ori_pc, 4);
+  // jalr
+  if((instr&0x7f) == 0b1100111){
+      difftest_skip_dut(1, 2);
+  }
+  else if((instr&0x7f) == 0b1101011){
+      difftest_skip_ref();
+  }
+  else if((instr&0x7f) == 0b1110011){
+      difftest_skip_ref();
+  }
   difftest_step(ori_pc, cpu.pc);
 #endif
 
@@ -59,6 +74,19 @@ void cpu_exec(uint64_t n) {
   }
 
     /* TODO: check watchpoints here. */
+  bool success;
+  int res, flag = 0;
+  for(WP *tmp = head; tmp; tmp = tmp->next){
+    res = expr(tmp->wp_expr, &success);
+    if(res != tmp->last_value){
+      flag = 1;
+      tmp->last_value = res;
+    }
+  }
+  if(flag){
+    printf("Watchpoint triggered!\n");
+    nemu_state.state = NEMU_STOP;
+  }
 
 #endif
 

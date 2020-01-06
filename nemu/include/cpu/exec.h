@@ -39,12 +39,18 @@ static inline uint32_t instr_fetch(vaddr_t *pc, int len) {
 /* Instruction Decode and EXecute */
 static inline void idex(vaddr_t *pc, OpcodeEntry *e) {
   if (e->decode)
+  {
     e->decode(pc);
+  }
   e->execute(pc);
 }
 
 static inline void update_pc(void) {
-  if (decinfo.is_jmp) { decinfo.is_jmp = 0; }
+  if (decinfo.is_jmp) {
+      cpu.pc = decinfo.jmp_pc;
+      //printf("test pc:%x", decinfo.jmp_pc);
+      decinfo_set_jmp(false);
+  }
   else { cpu.pc = decinfo.seq_pc; }
 }
 

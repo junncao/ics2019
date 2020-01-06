@@ -8,6 +8,10 @@
 #include <readline/history.h>
 
 void cpu_exec(uint64_t);
+extern WP *head;
+extern void isa_reg_display();
+extern void difftest_attach();
+extern void difftest_detach();
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
@@ -36,7 +40,106 @@ static int cmd_q(char *args) {
   return -1;
 }
 
+static int cmd_si(char *args){
+  int lineNum = 1;
+  if(args){
+    sscanf(args, "%d", &lineNum);
+  }
+  cpu_exec(lineNum);
+  return 0;
+}
+
+static int cmd_info(char *args){
+  if(args){
+    if(args[0] == 'r'){
+      isa_reg_display();
+    }
+    else if(args[0] == 'w'){
+      printf("%-6s%-20s%-10s\n","Num", "Experssion", "Result");
+      for(WP* tmp = head;tmp;tmp = tmp->next){
+        printf("%-6d%-20s%-6d\n", tmp->NO, tmp->wp_expr, tmp->last_value);
+      }
+      return 0;
+    }
+    else{
+      printf("Wrong argument!\n");
+    }
+  }
+  else{
+    printf("Lack argument!\n");
+  }
+  return 0;
+}
+
+static int cmd_x(char *args){
+  int number, index;
+  number = index = -1;
+  sscanf(args, "%d 0x%x", &number, &index);
+  if(index == -1 || number <= 0 ){
+    printf("Wrong argument!\n");
+    return 0;
+  }
+  for(int i = 0; i < number; i++){
+    if(i%4 == 0){
+      printf("0x%-10x:", index + i*4);
+    }
+    printf("0x%-10x", isa_vaddr_read(index + i*4, 4));
+    if( ((i-3)%4 == 0) && (i != number-1))
+      printf("\n");
+  }
+  printf("\n");
+  return 0;
+}
+
+static int cmd_p(char *args){
+  bool success;
+  int res;
+  res = expr(args, &success);
+  if(!success){
+    printf("Wrong experssion!\n");
+    return 0;
+  }
+  printf("0x%x %d\n", res, res);
+  return 0;
+}
+
+static int cmd_w(char *args){
+  bool success;
+  int res;
+  res = expr(args, &success);
+  if(!success){
+    printf("Wrong experssion!\n");
+    return 0;
+  }
+  WP *wp = new_wp();
+  wp->last_value = res;
+  strcpy(wp->wp_expr, args);
+  return 0;
+}
+
+static int cmd_d(char *args){
+  int number;
+  sscanf(args, "%d", &number);
+  for(WP* tmp = head; tmp; tmp = tmp->next){
+    if(tmp->NO == number){
+      free_wp(tmp);
+      return 0;
+    }
+  }
+  return 0;
+}
+
 static int cmd_help(char *args);
+
+static int cmd_attach(char *args){
+    difftest_attach();
+    return 0;
+}
+
+static int cmd_detach(char *args){
+    difftest_detach();
+    return 0;
+}
 
 static struct {
   char *name;
@@ -46,8 +149,14 @@ static struct {
   { "help", "Display informations about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-
-  /* TODO: Add more commands */
+  { "si", "Execute N steps", cmd_si },
+  { "info", "Show the information of register", cmd_info },
+  { "x", "Show the details of memory", cmd_x },
+  { "p", "Print the result of an experssion", cmd_p },
+  { "w", "Set watchpoint", cmd_w },
+  { "d", "Delete watchpoint", cmd_d },
+  { "detach", "Quit difftest mode", cmd_detach},
+  { "attach", "Dive into difftest mode", cmd_attach},
 
 };
 

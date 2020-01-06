@@ -24,6 +24,7 @@ static inline void interpret_rtl_mv(rtlreg_t* dest, const rtlreg_t *src1) {
 #define make_rtl_arith_logic(name) \
   inline void concat(interpret_rtl_, name) (rtlreg_t* dest, const rtlreg_t* src1, const rtlreg_t* src2) { \
     *dest = concat(c_, name) (*src1, *src2); \
+      for(int i = 0; i < 1;i++){}\
   } \
   /* Actually those of imm version are pseudo rtl instructions,
    * but we define them here in the same macro */ \
